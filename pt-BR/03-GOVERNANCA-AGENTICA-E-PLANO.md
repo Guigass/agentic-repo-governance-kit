@@ -369,9 +369,10 @@ Para cada artefato, verifique:
 - se uma skill deve ser manual;
 - se um agent agrega valor além de um prompt ou skill;
 - se referências substituem a duplicação de conteúdo;
-- se o conjunto é compreensível por um novo mantenedor.
+- se o conjunto é compreensível por um novo mantenedor;
+- se a governança existente deve ser unificada, refatorada ou removida em vez de estendida.
 
-Prefira poucos artefatos claros a uma biblioteca extensa que raramente será usada.
+Prefira poucos artefatos claros a uma biblioteca extensa que raramente será usada. Quando já existir governança, prefira limpar sobreposição e obsolescência a adicionar artefatos paralelos.
 
 ## 11. Segurança e escalonamento
 
@@ -402,7 +403,13 @@ Ambientes aprovados, sinais observados, limitações de versão ou formato e cam
 
 ## 2. Governança existente
 
-O que será preservado, atualizado, consolidado ou considerado obsoleto, sem fazer alterações. Inclua arquivos portáteis e adaptadores específicos de ambiente.
+O que será preservado, atualizado, unificado/consolidado, refatorado ou removido como obsoleto, sem fazer alterações. Inclua arquivos portáteis e adaptadores específicos de ambiente. Para cada artefato existente, declare a ação e a evidência. Aplique este checklist de limpeza:
+
+- conteúdo portável duplicado em adaptador de ambiente;
+- rules always-on vagas ou desnecessárias;
+- skills ou agents sobrepostos com a mesma responsabilidade;
+- caminhos obsoletos que não batem mais com o projeto;
+- wrappers que só copiam uma skill portável ou o `AGENTS.md`.
 
 ## 3. Matriz de necessidades
 

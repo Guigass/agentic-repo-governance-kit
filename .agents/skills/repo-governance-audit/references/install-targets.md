@@ -18,12 +18,13 @@ Copy or recreate the full skill directory:
 - `SKILL.md`
 - `references/install-targets.md`
 - `references/execution-modes.md`
+- `references/governance-cleanup.md`
 
 Source of truth (in order):
 
 1. The skill directory currently loaded / being executed (self-copy).
 2. Local kit clone: `.agents/skills/repo-governance-audit/`.
-3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/.agents/skills/repo-governance-audit/`.
+3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/.agents/skills/repo-governance-audit/`.
 
 ## Overwrite rules
 

@@ -250,7 +250,7 @@ Para cada pergunta importante, informe o documento responsável ou por que ela p
 Use uma tabela com:
 
 - caminho;
-- ação: criar, atualizar, consolidar, preservar ou não criar;
+- ação: criar, atualizar, consolidar, unificar, refatorar, remover, preservar ou não criar;
 - propósito;
 - público;
 - evidência ou lacuna que justifica a ação;
@@ -262,11 +262,11 @@ Use uma tabela com:
 - gatilho de atualização;
 - validação necessária.
 
-Qualquer remoção ou substituição deve aparecer apenas como proposta explícita e exigir aprovação específica.
+Qualquer remoção, unificação ou substituição deve aparecer apenas como proposta explícita e exigir aprovação específica do caminho e da ação.
 
 ## 5. Conteúdo a consolidar
 
-Mostre duplicações que devem ser resolvidas e qual será a fonte canônica.
+Mostre duplicações que devem ser resolvidas, qual será a fonte canônica, remoções propostas de docs obsoletos e a navegação resultante após a unificação.
 
 ## 6. Estado atual versus propostas
 

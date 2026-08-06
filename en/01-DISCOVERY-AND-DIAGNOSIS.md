@@ -236,10 +236,12 @@ For each relevant artifact, determine:
 - duplications and contradictions;
 - critical gaps;
 - signs of staleness;
-- whether it should be preserved, improved, consolidated, or only referenced;
+- whether it should be preserved, improved, consolidated, refactored, removed, or only referenced;
 - how it should be updated when the project changes.
 
-For each relevant artifact, state an explicit verdict — `preserve`, `improve`, `consolidate`, or `reference` — with the criterion that justifies it. `improve` requires a concrete deficiency (staleness, contradiction, missing coverage of a critical flow, broken navigation), not an aesthetic preference. In `LEAN`, focus the verdicts on the highest-impact artifacts and record the rest as `preserve` unless a deficiency is proven.
+For each relevant artifact, state an explicit verdict — `preserve`, `improve`, `consolidate`, `refactor`, `remove`, or `reference` — with the criterion that justifies it. `improve` requires a concrete deficiency (staleness, contradiction, missing coverage of a critical flow, broken navigation), not an aesthetic preference. `refactor` requires proven overlap, contradiction, or unjustified context cost across layers. `remove` requires evidence the artifact is obsolete, unused, or a pure duplicate of a chosen canonical source. In `LEAN`, focus the verdicts on the highest-impact artifacts and record the rest as `preserve` unless a deficiency is proven.
+
+When multiple artifacts exist, also produce a short redundancy map across docs, portable instructions, rules, skills, agents, and environment adapters (what overlaps, which source should remain canonical).
 
 Do not recommend replacement based on aesthetic preference alone.
 
@@ -364,11 +366,11 @@ Observed facts and items not identified in the searched scope.
 
 ## 13. Existing documentation
 
-Relevant artifacts, quality, divergences, and duplications.
+Relevant artifacts, quality, divergences, duplications, and cleanup verdicts (`preserve`, `improve`, `consolidate`, `refactor`, `remove`, `reference`).
 
 ## 14. Existing agentic governance
 
-Rules, skills, agents, instruction files, and apparent behavior.
+Rules, skills, agents, instruction files, apparent behavior, redundancy map across layers, and cleanup verdicts.
 
 ## 15. Divergence log
 

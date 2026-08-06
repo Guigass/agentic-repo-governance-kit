@@ -250,7 +250,7 @@ For each important question, state the responsible document or why it will remai
 Use a table with:
 
 - path;
-- action: create, update, consolidate, preserve, or do not create;
+- action: create, update, consolidate, unify, refactor, remove, preserve, or do not create;
 - purpose;
 - audience;
 - evidence or gap justifying the action;
@@ -262,11 +262,11 @@ Use a table with:
 - update trigger;
 - required validation.
 
-Any removal or replacement must appear only as an explicit proposal and require specific approval.
+Any removal, unification, or replacement must appear only as an explicit proposal and require specific approval of the path and action.
 
 ## 5. Content to consolidate
 
-Show duplications that must be resolved and which will be the canonical source.
+Show duplications that must be resolved, which will be the canonical source, proposed removals of obsolete docs, and the resulting navigation after unification.
 
 ## 6. Current state versus proposals
 

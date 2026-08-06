@@ -3,16 +3,17 @@ name: repo-governance-audit
 description: >-
   Installs this audit skill into the target repo for Cursor, Claude Code,
   Codex, or portable/.agents, then runs the full Agentic Repository Governance
-  Kit (Parts 1-4) in multi-agent or step-by-step mode. Use when the user asks
-  to audit a repository, install the governance kit skill, or run repo
-  discovery and agentic governance planning.
+  Kit (Parts 1-4) in multi-agent or step-by-step mode, including cleanup and
+  refactor of existing docs, rules, skills, and agents when present. Use when
+  the user asks to audit a repository, install the governance kit skill, clean
+  up redundant governance, or run repo discovery and agentic governance planning.
 ---
 
 # Repository governance audit
 
 Entry point for the [Agentic Repository Governance Kit](https://github.com/Guigass/agentic-repo-governance-kit). The open workspace is the TARGET repository. The kit is only an instruction source — never audit or modify the kit as the target.
 
-Pinned kit version for raw URLs: `v1.2.0`.
+Pinned kit version for raw URLs: `v1.3.0`.
 
 ## Phase A — Install (stop and ask)
 
@@ -33,10 +34,14 @@ Defaults: depth `STANDARD`; delivery language = user's language.
 
 Load kit parts from the local kit clone when available; otherwise use pinned raw URLs under:
 
-- English: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/`
-- Portuguese: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/`
+- English: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/`
+- Portuguese: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/pt-BR/`
 
 Always read Part 0 first (`00-HOW-TO-USE.md` / `00-COMO-USAR.md`), then the part for the current stage.
+
+### Existing governance cleanup
+
+If Part 1 finds existing docs, `AGENTS.md`, rules, skills, agents, or environment adapters, read [references/governance-cleanup.md](references/governance-cleanup.md) and apply it through Parts 1–3: unify what can be unified, cut redundancy, mark obsolete removals, and refactor only with evidence. Cleanup is planned in those parts; Part 4 executes only approved path+action items (including `remove` / `unify` / `refactor`).
 
 ### Safety (non-negotiable)
 

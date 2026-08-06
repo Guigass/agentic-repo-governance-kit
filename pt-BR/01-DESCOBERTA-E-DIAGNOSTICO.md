@@ -236,10 +236,12 @@ Para cada artefato relevante, determine:
 - duplicações e contradições;
 - lacunas críticas;
 - sinais de desatualização;
-- se deve ser preservado, melhorado, consolidado ou apenas referenciado;
+- se deve ser preservado, melhorado, consolidado, refatorado, removido ou apenas referenciado;
 - como deveria ser atualizado quando o projeto mudar.
 
-Para cada artefato relevante, declare um veredito explícito — `preservar`, `melhorar`, `consolidar` ou `referenciar` — com o critério que o justifica. `melhorar` exige uma deficiência concreta (desatualização, contradição, cobertura ausente de fluxo crítico, navegação quebrada), não uma preferência estética. Em `ENXUTO`, concentre os veredictos nos artefatos de maior impacto e registre os demais como `preservar` a menos que uma deficiência seja comprovada.
+Para cada artefato relevante, declare um veredito explícito — `preservar`, `melhorar`, `consolidar`, `refatorar`, `remover` ou `referenciar` — com o critério que o justifica. `melhorar` exige uma deficiência concreta (desatualização, contradição, cobertura ausente de fluxo crítico, navegação quebrada), não uma preferência estética. `refatorar` exige sobreposição, contradição ou custo de contexto injustificado comprovados entre camadas. `remover` exige evidência de que o artefato está obsoleto, sem uso ou é duplicata pura de uma fonte canônica escolhida. Em `ENXUTO`, concentre os veredictos nos artefatos de maior impacto e registre os demais como `preservar` a menos que uma deficiência seja comprovada.
+
+Quando existirem vários artefatos, produza também um mapa curto de redundâncias entre docs, instruções portáteis, rules, skills, agents e adaptadores de ambiente (o que se sobrepõe e qual fonte deve permanecer canônica).
 
 Não recomende substituição apenas por preferência estética.
 
@@ -364,11 +366,11 @@ Fatos observados e itens não identificados no escopo pesquisado.
 
 ## 13. Documentação existente
 
-Artefatos relevantes, qualidade, divergências e duplicações.
+Artefatos relevantes, qualidade, divergências, duplicações e veredictos de limpeza (`preservar`, `melhorar`, `consolidar`, `refatorar`, `remover`, `referenciar`).
 
 ## 14. Governança agêntica existente
 
-Rules, skills, agents, arquivos de instrução e comportamento aparente.
+Rules, skills, agents, arquivos de instrução, comportamento aparente, mapa de redundâncias entre camadas e veredictos de limpeza.
 
 ## 15. Registro de divergências
 

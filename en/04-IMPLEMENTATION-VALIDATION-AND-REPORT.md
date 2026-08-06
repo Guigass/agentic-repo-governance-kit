@@ -28,7 +28,7 @@ Briefly cite what was approved.
 
 ## File allowlist
 
-List the files that may be created or updated.
+List the files that may be created, updated, unified, refactored, or removed, with the exact action per path.
 
 ## Out-of-scope items
 
@@ -163,6 +163,7 @@ Run only local, safe, and proportional checks.
 - agents have clear responsibility and limits;
 - the router does not reference nonexistent artifacts;
 - there is no relevant duplication between docs, rules, skills, and agents;
+- approved unifications and removals left no material leftover duplicate;
 - automatic artifacts do not add excessive context without justification.
 
 ### Safety
@@ -215,47 +216,51 @@ What was authorized and any restrictions.
 
 Path and purpose.
 
-## 4. Updated files
+## 4. Updated, unified, or refactored files
 
-Path and change summary.
+Path, action, and change summary.
 
-## 5. Preserved files
+## 5. Removed files
+
+Path and reason for each approved removal. If none, state none.
+
+## 6. Preserved files
 
 List only those relevant to plan decisions, not every inspected file.
 
-## 6. Resulting documentation architecture
+## 7. Resulting documentation architecture
 
 Explain navigation, canonical sources, and the separation between current state and proposals.
 
-## 7. Resulting Rules, Skills, and Agents
+## 8. Resulting Rules, Skills, and Agents
 
 List only those implemented and their triggers.
 
-## 8. Approved items not implemented
+## 9. Approved items not implemented
 
 Explain blockers, drift, or limitations.
 
-## 9. Items not created
+## 10. Items not created
 
 Record the relevant exclusions that avoided duplication or bureaucracy.
 
-## 10. Executed validations
+## 11. Executed validations
 
 Commands and summarized results.
 
-## 11. Limitations and human validation
+## 12. Limitations and human validation
 
 What remains uncertain or depends on external context.
 
-## 12. Maintenance
+## 13. Maintenance
 
 Events that should trigger updates to each documentation or agentic area.
 
-## 13. Commit recommendation
+## 14. Commit recommendation
 
 Files, split, suggested message, and whether it is ready for human review.
 
-## 14. Safety confirmation
+## 15. Safety confirmation
 
 Explicitly declare:
 
@@ -273,6 +278,7 @@ The task is only complete when:
 - all implemented files belong to the approved scope;
 - the documentation reflects current evidence;
 - rules, skills, and agents have clear usefulness and scope;
+- approved cleanup left no material leftover duplication;
 - navigation and references were verified;
 - risks and limitations are explicit;
 - the diff was reviewed;
