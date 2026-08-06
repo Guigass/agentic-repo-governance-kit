@@ -28,7 +28,7 @@ Cite resumidamente o que foi aprovado.
 
 ## Allowlist de arquivos
 
-Liste arquivos que podem ser criados ou atualizados.
+Liste arquivos que podem ser criados, atualizados, unificados, refatorados ou removidos, com a ação exata por caminho.
 
 ## Itens fora do escopo
 
@@ -163,6 +163,7 @@ Execute verificações somente locais, seguras e proporcionais.
 - agents têm responsabilidade e limites claros;
 - router não referencia artefatos inexistentes;
 - não existe duplicação relevante entre docs, rules, skills e agents;
+- unificações e remoções aprovadas não deixaram duplicata material residual;
 - artefatos automáticos não adicionam contexto excessivo sem justificativa.
 
 ### Segurança
@@ -215,47 +216,51 @@ O que foi autorizado e eventuais restrições.
 
 Caminho e finalidade.
 
-## 4. Arquivos atualizados
+## 4. Arquivos atualizados, unificados ou refatorados
 
-Caminho e resumo da mudança.
+Caminho, ação e resumo da mudança.
 
-## 5. Arquivos preservados
+## 5. Arquivos removidos
+
+Caminho e motivo de cada remoção aprovada. Se não houver, declare nenhum.
+
+## 6. Arquivos preservados
 
 Liste apenas os relevantes para decisões do plano, não todos os arquivos inspecionados.
 
-## 6. Arquitetura documental resultante
+## 7. Arquitetura documental resultante
 
 Explique navegação, fontes canônicas e separação entre estado atual e propostas.
 
-## 7. Rules, Skills e Agents resultantes
+## 8. Rules, Skills e Agents resultantes
 
 Liste somente os implementados e seus gatilhos.
 
-## 8. Itens aprovados não implementados
+## 9. Itens aprovados não implementados
 
 Explique bloqueios, deriva ou limitações.
 
-## 9. Itens não criados
+## 10. Itens não criados
 
 Registre as exclusões relevantes que evitaram duplicação ou burocracia.
 
-## 10. Validações executadas
+## 11. Validações executadas
 
 Comandos e resultados resumidos.
 
-## 11. Limitações e validação humana
+## 12. Limitações e validação humana
 
 O que permanece incerto ou depende de contexto externo.
 
-## 12. Manutenção
+## 13. Manutenção
 
 Eventos que devem provocar atualização de cada área documental ou agêntica.
 
-## 13. Recomendação de commit
+## 14. Recomendação de commit
 
 Arquivos, separação, mensagem sugerida e indicação se está pronto para revisão humana.
 
-## 14. Confirmação de segurança
+## 15. Confirmação de segurança
 
 Declare explicitamente:
 
@@ -273,6 +278,7 @@ A tarefa só está concluída quando:
 - todos os arquivos implementados pertencem ao escopo aprovado;
 - documentação reflete evidências atuais;
 - rules, skills e agents têm utilidade e escopo claros;
+- a limpeza aprovada não deixou duplicação material residual;
 - navegação e referências foram verificadas;
 - riscos e limitações estão explícitos;
 - o diff foi revisado;

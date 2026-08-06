@@ -11,6 +11,8 @@ Both modes run the full kit (Parts 1–4) and keep every human gate. Prefer the 
 
 Minimum artifact contracts (validate before advancing): `DIAGNOSTICO_APROVAVEL`, `PLANO_DOCUMENTAL`, `PLANO_GOVERNANCA`, `PLANO_CONSOLIDADO`, `IMPLEMENTACAO_REALIZADA` — field lists are in the kit README “One-copy multi-agent orchestrator” section.
 
+When the target already has docs, rules, skills, or agents, those plans and the consolidated allowlist must also list cleanup actions (`unify` / `consolidate`, `refactor`, `remove`) per [governance-cleanup.md](governance-cleanup.md). Removals stay proposals until the human allowlist names each path and action.
+
 ## Multi-agent
 
 Follow the one-copy orchestrator in the kit `README.md` (or `README.pt-BR.md`):

@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 
 ## [Unreleased]
 
+## [v1.3.0] - 2026-08-06
+### Added
+- Governance cleanup pass in the installable audit skill (`references/governance-cleanup.md`): when the target already has docs, rules, skills, or agents, Parts 1–3 must plan unify/refactor/remove actions; Part 4 executes only approved path+action items.
+
+### Changed
+- Parts 1–4 (en and pt-BR) make cleanup of existing documentation and agentic governance explicit (verdicts, plan actions, allowlist, and final report sections for removals/unifications).
+- Bootstrap, orchestrator, and skill pinned raw URLs to `/v1.3.0/`.
+
+### Migration
+- Pinned executions against `v1.2.0` remain valid on that tag.
+- New executions should point raw URLs at `/v1.3.0/`.
+
 ## [v1.2.0] - 2026-08-06
 ### Added
 - Installable audit skill `repo-governance-audit` under `.agents/skills/repo-governance-audit/`: asks for IDE install target (Cursor, Claude Code, Codex, or portable/generic), asks multi-agent vs step-by-step, then runs the full Parts 1–4 kit flow with human gates.

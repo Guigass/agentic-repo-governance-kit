@@ -369,9 +369,10 @@ For each artifact, check:
 - whether a skill should be manual;
 - whether an agent adds value beyond a prompt or skill;
 - whether references replace content duplication;
-- whether the set is understandable by a new maintainer.
+- whether the set is understandable by a new maintainer;
+- whether existing governance should be unified, refactored, or removed rather than extended.
 
-Prefer a few clear artifacts over an extensive library that will rarely be used.
+Prefer a few clear artifacts over an extensive library that will rarely be used. When governance already exists, prefer cleanup of overlap and obsolescence over adding parallel artifacts.
 
 ## 11. Safety and escalation
 
@@ -402,7 +403,13 @@ Approved environments, observed signals, version or format limitations, and fiel
 
 ## 2. Existing governance
 
-What will be preserved, updated, consolidated, or considered obsolete, without making changes. Include portable files and environment-specific adapters.
+What will be preserved, updated, unified/consolidated, refactored, or removed as obsolete, without making changes. Include portable files and environment-specific adapters. For each existing artifact, state the action and evidence. Apply this cleanup checklist:
+
+- portable content duplicated into an environment adapter;
+- vague or unnecessary always-on rules;
+- overlapping skills or agents with the same responsibility;
+- obsolete paths that no longer match the project;
+- wrappers that only copy a portable skill or `AGENTS.md`.
 
 ## 3. Needs matrix
 
