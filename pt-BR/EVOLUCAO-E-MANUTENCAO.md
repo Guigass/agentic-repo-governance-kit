@@ -13,7 +13,7 @@ Produzir uma próxima versão do kit que seja mais precisa, mais segura e mais p
 Acione este fluxo quando um ou mais dos itens abaixo forem verdadeiros:
 
 - Uma nova geração de modelos de IA muda como agentes leem, amostram ou seguem prompts.
-- Novas capacidades de agentes/IDEs aparecem (novos formatos de Cursor Rules/Skills/Agents, novos mecanismos de subagentes, novas opções de escopo ou somente-leitura).
+- Novas capacidades de agentes/IDEs aparecem (novos formatos de Rules/Skills/Agents em Cursor, Claude Code, Codex, Copilot, Gemini CLI ou outros ambientes; novos padrões portáteis; novos mecanismos de subagentes; novas opções de escopo ou somente-leitura).
 - Um novo padrão portátil surge ou muda (por exemplo, suporte a `AGENTS.md` entre Claude Code, Codex, Copilot).
 - Uma nova diretiva recorrente é necessária (segurança, testes, privacidade, custo-efetividade, ou outra preocupação comprovada pelo uso real).
 - Feedback de execuções reais mostra um modo de falha, ambiguidade ou excesso de burocracia.

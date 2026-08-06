@@ -73,7 +73,7 @@ Run a targeted check of the evidence used by the file to be changed:
 - confirm that paths and symbols still exist;
 - confirm the working tree has not materially changed since the diagnosis;
 - confirm the chosen canonical documentation is still appropriate;
-- confirm the current syntax of rules, skills, and agents before creating them;
+- confirm the current syntax of rules, skills, and agents for each approved target environment before creating them;
 - record any drift that invalidates the plan. In `RE_AUDIT` mode, also record drift between audits — the delta between the current code state and the existing documentation or governance produced by the previous audit.
 
 If the drift materially changes the plan, stop and request new approval.
@@ -96,7 +96,9 @@ When creating or updating documents:
 
 For each approved rule:
 
-- use the directory, extension, and frontmatter supported by the current version;
+- use the directory, extension, and frontmatter supported by each approved target environment;
+- place portable instructions in `AGENTS.md` when that is the approved layer;
+- create environment-specific adapters only for non-portable content and reference the canonical source;
 - configure activation and scope explicitly;
 - keep the content short and actionable;
 - reference canonical documentation;
@@ -108,13 +110,14 @@ For each approved rule:
 
 For each approved skill:
 
-- use the current structure and frontmatter;
+- prefer the open Agent Skills format under `.agents/skills/<skill-name>/SKILL.md` when approved and supported;
+- use an environment-specific skill path only when approved and necessary; do not duplicate the same skill across multiple roots;
+- use the structure and frontmatter supported by the target environment;
 - make the description specific for correct selection;
 - define inputs, steps, limits, output, and validation;
 - differentiate inspection, recommendation, and execution;
 - include human gates for sensitive actions;
 - use scripts or assets only if approved and necessary;
-- do not duplicate the same skill across multiple roots;
 - configure automatic or manual invocation according to the plan and current support.
 
 A skill must never expand the authorization received in the task that invokes it.
@@ -123,7 +126,8 @@ A skill must never expand the authorization received in the task that invokes it
 
 For each approved agent:
 
-- use the current format and frontmatter;
+- map the approved mission to the subagent or custom-agent format of each approved environment;
+- use the format and frontmatter supported by that environment;
 - define a bounded mission;
 - grant minimal tools and permissions;
 - use read-only mode by default for analysis and review, when supported;
@@ -151,8 +155,9 @@ Run only local, safe, and proportional checks.
 
 ### Agentic governance
 
-- file and directory names are recognized by the current version;
-- frontmatter is valid;
+- file and directory names are recognized by each approved target environment;
+- frontmatter is valid for each environment that receives an adapter;
+- portable content is not duplicated into environment-specific files;
 - rules have coherent activation and scope;
 - skills have clear triggers and complete procedures;
 - agents have clear responsibility and limits;

@@ -9,8 +9,8 @@ Create or improve, when justified by the real project:
 - technical and architectural documentation;
 - documentation for modules, domain, critical flows, and integrations;
 - development, environment, testing, deployment, and troubleshooting guides;
-- specific and correctly scoped Cursor Rules;
-- operational, reusable Skills;
+- portable agent instructions (`AGENTS.md`) and environment-specific rules when justified;
+- operational, reusable Skills, preferring the open Agent Skills standard;
 - specialized Agents and a router, when they bring real benefit;
 - mechanisms to keep documentation and governance in sync with the project.
 
@@ -21,7 +21,7 @@ The pack does not authorize functional changes to the application.
 1. Run [01-DISCOVERY-AND-DIAGNOSIS.md](01-DISCOVERY-AND-DIAGNOSIS.md).
 2. Review the diagnosis and correct any conclusions.
 3. Run [02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md](02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md).
-4. Run [03-CURSOR-GOVERNANCE-AND-PLAN.md](03-CURSOR-GOVERNANCE-AND-PLAN.md).
+4. Run [03-AGENTIC-GOVERNANCE-AND-PLAN.md](03-AGENTIC-GOVERNANCE-AND-PLAN.md).
 5. Approve, reject, or adjust the consolidated plan.
 6. Only after explicit approval, run [04-IMPLEMENTATION-VALIDATION-AND-REPORT.md](04-IMPLEMENTATION-VALIDATION-AND-REPORT.md).
 

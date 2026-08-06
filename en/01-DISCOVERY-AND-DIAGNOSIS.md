@@ -84,7 +84,7 @@ The preflight may use minimal inspection to locate the root, instructions, and r
 Before architectural analysis:
 
 1. Identify explicit user instructions.
-2. Look for applicable governance files, such as `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.cursor/skills/`, `.cursor/agents/`, `CONTRIBUTING.md`, and equivalents.
+2. Look for applicable governance files, such as `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/`, `.cursor/skills/`, `.cursor/agents/`, `.claude/` (settings, skills, agents), `.codex/`, `.agents/skills/`, `.github/copilot-instructions.md`, `.github/instructions/`, `.github/agents/`, `CONTRIBUTING.md`, and equivalents.
 3. Read only the files relevant to the task, respecting scope and hierarchy.
 4. Record conflicts between instructions, documentation, and observed behavior.
 5. Do not depend on a custom skill to start, but respect applicable existing instructions.

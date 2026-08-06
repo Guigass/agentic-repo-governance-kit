@@ -2,7 +2,7 @@
 
 > 🇺🇸 English version (canonical): [README.md](README.md)
 
-Um kit modular de prompts para auditar repositórios de software, desenhar documentação técnica sustentável e criar Cursor Rules, Skills e Agents específicos do projeto, com gates de segurança explícitos.
+Um kit modular de prompts para auditar repositórios de software, desenhar documentação técnica sustentável e criar governança agêntica portável (`AGENTS.md`, Agent Skills aberto) mais adaptadores específicos de ambiente para Cursor, Claude Code, Codex, Copilot, Gemini CLI e ferramentas semelhantes, com gates de segurança explícitos.
 
 O kit é bilíngue. O inglês é a versão canônica em [`en/`](en/); o português brasileiro está em [`pt-BR/`](pt-BR/). As duas versões são mantidas em paridade, e os agentes podem produzir o relatório final em outro idioma quando solicitado pelo usuário.
 
@@ -24,7 +24,7 @@ Planejamento não é tratado como permissão para escrever. A fase de implementa
 | [`pt-BR/00-COMO-USAR.md`](pt-BR/00-COMO-USAR.md) | [`en/00-HOW-TO-USE.md`](en/00-HOW-TO-USE.md) | Guia de uso, ordem de execução, modos e gates de aprovação | Não |
 | [`pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md`](pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md) | [`en/01-DISCOVERY-AND-DIAGNOSIS.md`](en/01-DISCOVERY-AND-DIAGNOSIS.md) | Descoberta do repositório e diagnóstico baseado em evidências | Não |
 | [`pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md`](pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md) | [`en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md`](en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md) | Arquitetura documental e plano exato de arquivos | Não |
-| [`pt-BR/03-GOVERNANCA-CURSOR-E-PLANO.md`](pt-BR/03-GOVERNANCA-CURSOR-E-PLANO.md) | [`en/03-CURSOR-GOVERNANCE-AND-PLAN.md`](en/03-CURSOR-GOVERNANCE-AND-PLAN.md) | Planejamento de Rules, Skills, Agents e Router | Não |
+| [`pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md`](pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md) | [`en/03-AGENTIC-GOVERNANCE-AND-PLAN.md`](en/03-AGENTIC-GOVERNANCE-AND-PLAN.md) | Planejamento de Rules, Skills, Agents e Router portáveis e específicos de ambiente | Não |
 | [`pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md`](pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md) | [`en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md`](en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md) | Implementação aprovada, validação e relatório final | Somente após aprovação explícita |
 
 ## Início rápido com URL
@@ -40,8 +40,8 @@ https://github.com/Guigass/agentic-repo-governance-kit
 O repositório aberto atualmente no seu workspace é o repositório ALVO. O repositório do kit é apenas uma fonte de instruções e não deve ser analisado como alvo.
 
 Primeiro, leia estes arquivos na ordem:
-1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/00-COMO-USAR.md
-2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
+1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/00-COMO-USAR.md
+2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
 
 Execute agora somente a Parte 1, no modo AUDITORIA_SOMENTE_LEITURA e com profundidade PADRAO.
 
@@ -67,20 +67,20 @@ Após revisar e corrigir o diagnóstico, use o próximo prompt explicitamente.
 Continue usando o Agentic Repository Governance Kit.
 
 Leia e execute somente a Parte 2:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
 
 Use o diagnóstico aprovado já presente nesta conversa. Produza a arquitetura documental e o plano exato de arquivos, mas não modifique nenhum arquivo. Pare após o plano.
 ```
 
-### Governança do Cursor
+### Governança agêntica
 
 ```text
 Continue usando o Agentic Repository Governance Kit.
 
 Leia e execute somente a Parte 3:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/03-GOVERNANCA-CURSOR-E-PLANO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
 
-Use o diagnóstico aprovado e o plano documental já presentes nesta conversa. Produza o plano de Rules, Skills, Agents e Router, mas não modifique nenhum arquivo. Pare após o plano.
+Use o diagnóstico aprovado e o plano documental já presentes nesta conversa. Produza o plano de Rules, Skills, Agents e Router para os ambientes-alvo aprovados, mas não modifique nenhum arquivo. Pare após o plano.
 ```
 
 ### Implementação aprovada
@@ -94,7 +94,7 @@ Escopo aprovado:
 [cole aqui os arquivos e ações exatos aprovados]
 
 Leia e execute a Parte 4 do Agentic Repository Governance Kit:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
 
 Implemente somente o escopo aprovado. Preserve mudanças preexistentes e não relacionadas. Não altere código funcional da aplicação. Não faça stage, commit, push, publicação ou acesso a sistemas externos sem autorização separada.
 ```
@@ -124,7 +124,7 @@ Configuração:
 - Commit, push, PR, deploy e acesso a sistemas externos: proibidos sem autorização separada
 
 Primeiro leia:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/00-COMO-USAR.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/00-COMO-USAR.md
 
 REGRAS DO ORQUESTRADOR
 
@@ -161,7 +161,7 @@ Forneça a ele:
 - o repositório alvo atual;
 - as restrições deste prompt;
 - a Parte 1 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
 
 Tarefa:
 - executar integralmente a descoberta e o diagnóstico;
@@ -179,7 +179,7 @@ Forneça a ele:
 - o DIAGNOSTICO_APROVAVEL completo;
 - correções factuais já confirmadas, se houver;
 - a Parte 2 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
 
 Tarefa:
 - desenhar a arquitetura documental proporcional;
@@ -191,21 +191,23 @@ Tarefa:
 
 Aguarde a conclusão. Valide o plano contra o contrato de artefato.
 
-ETAPA 3 — cursor-governance-architect
+ETAPA 3 — agent-governance-architect
 
-Somente após concluir a Etapa 2, inicie um especialista somente leitura chamado cursor-governance-architect.
+Somente após concluir a Etapa 2, inicie um especialista somente leitura chamado agent-governance-architect.
 
 Forneça a ele:
 - o DIAGNOSTICO_APROVAVEL;
 - o PLANO_DOCUMENTAL;
 - a Parte 3 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/03-GOVERNANCA-CURSOR-E-PLANO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
 
 Tarefa:
+- detectar ambientes-alvo aprovados e validar seus formatos atuais;
+- planejar AGENTS.md e Agent Skills portáveis primeiro, depois adaptadores específicos de ambiente apenas quando justificados;
 - planejar Rules, Skills, Agents e Router apenas quando justificados;
 - definir tratamento para riscos recorrentes P0 e P1;
-- evitar duplicação com a documentação canônica;
-- validar os formatos suportados pela versão atual do Cursor;
+- evitar duplicação com a documentação canônica e entre ambientes;
+- validar os formatos suportados por cada ambiente aprovado;
 - não editar nenhum arquivo;
 - devolver um artefato final chamado PLANO_GOVERNANCA.
 
@@ -255,7 +257,7 @@ Forneça a ele:
 - PLANO_GOVERNANCA;
 - PARECER_DE_INTEGRIDADE;
 - a Parte 4 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v0.1.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
 
 Tarefa:
 - implementar somente arquivos e ações presentes na ALLOWLIST_APROVADA;
@@ -311,7 +313,7 @@ repo-discovery-auditor
         ↓ aguarda e devolve DIAGNOSTICO_APROVAVEL
 documentation-architect
         ↓ aguarda e devolve PLANO_DOCUMENTAL
-cursor-governance-architect
+agent-governance-architect
         ↓ aguarda e devolve PLANO_GOVERNANCA
 plan-integrity-reviewer
         ↓ aguarda e solicita APROVAÇÃO HUMANA
@@ -336,7 +338,7 @@ Depois peça ao agente para ler `pt-BR/00-COMO-USAR.md` (ou `en/00-HOW-TO-USE.md
 
 Este kit segue [Versionamento Semântico](https://semver.org/). O `CHANGELOG.md` na raiz do repositório é a fonte canônica de mudanças.
 
-Para reprodutibilidade em produção, aponte as URLs raw usadas para carregar as partes do kit para uma tag de versão específica em vez de `main`. Por exemplo, use `/v0.1.0/pt-BR/00-COMO-USAR.md` em vez de `/main/pt-BR/00-COMO-USAR.md`. Os prompts de bootstrap e o orquestrador neste README já estão pinados em uma release com tag.
+Para reprodutibilidade em produção, aponte as URLs raw usadas para carregar as partes do kit para uma tag de versão específica em vez de `main`. Por exemplo, use `/v1.0.0/pt-BR/00-COMO-USAR.md` em vez de `/main/pt-BR/00-COMO-USAR.md`. Os prompts de bootstrap e o orquestrador neste README já estão pinados em uma release com tag.
 
 ## Evoluindo este kit
 
@@ -354,14 +356,14 @@ Quando o usuário quiser planejar uma nova feature ou uma nova parte do sistema 
 - Aprovação explícita antes de implementação.
 - Arquitetura atual separada de propostas futuras.
 - Documentação proporcional em vez de proliferação de arquivos.
-- Rules, Skills e Agents criados a partir de necessidades observadas.
+- Rules, Skills e Agents criados a partir de necessidades observadas, preferindo padrões portáteis.
 - Documentação canônica referenciada em vez de duplicada.
 - Working tree e mudanças não relacionadas preservadas.
 - Sem mutações em produção, banco, deploy ou estado externo por padrão.
 
-## Compatibilidade com o Cursor
+## Compatibilidade com ambientes de agentes
 
-Os formatos e capacidades do Cursor podem evoluir. Antes de criar Rules, Skills ou Agents, o kit pede ao agente que valide os diretórios, frontmatter, modos de ativação, escopo, ferramentas e opções de somente leitura suportados pela versão instalada e pela documentação oficial atual.
+Ambientes de agentes e padrões portáteis evoluem. Antes de criar Rules, Skills, Agents ou arquivos de instrução, o kit pede ao agente que detecte os ambientes-alvo aprovados e valide os diretórios, frontmatter, modos de ativação, escopo, ferramentas e opções de somente leitura suportados contra a documentação oficial de cada ambiente. Prefira camadas portáteis (`AGENTS.md`, `.agents/skills/`) e adicione adaptadores específicos de ambiente somente quando necessário.
 
 ## Escopo
 

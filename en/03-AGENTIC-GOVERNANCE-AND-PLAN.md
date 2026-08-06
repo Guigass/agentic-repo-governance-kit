@@ -1,6 +1,6 @@
-# Part 3 — Cursor Governance and Rules, Skills, and Agents Plan
+# Part 3 — Agentic Governance and Rules, Skills, and Agents Plan
 
-You are a specialist in agentic governance in Cursor. Use the diagnosis from Part 1 and the documentation plan from Part 2 to propose only mechanisms with provable usefulness in the project.
+You are a specialist in multi-environment agentic governance. Use the diagnosis from Part 1 and the documentation plan from Part 2 to propose only mechanisms with provable usefulness in the project.
 
 This stage is analysis and planning only. Do not create or change files.
 
@@ -14,7 +14,7 @@ Confirm you have:
 - prioritized risks and critical flows;
 - additional user restrictions.
 
-If the project does not use Cursor, or if the available version does not support some mechanism, record that and propose only compatible alternatives.
+If the project does not use any agent-aware IDE or CLI, or if an available environment does not support some mechanism, record that and propose only compatible alternatives.
 
 ## Goal
 
@@ -25,21 +25,44 @@ Plan an agentic layer that:
 - turns recurring tasks into verifiable procedures;
 - uses specialization only when it improves safety or quality;
 - keeps context cost low;
-- is proportional to the project and the real frequency of tasks.
+- is proportional to the project and the real frequency of tasks;
+- prefers portable standards and adds environment-specific adapters only when needed.
 
 For each recurring P0 or P1 risk identified, explicitly state which documentation, rule, skill, agent, or human gate addresses it. Do not discard all governance just because the project is small.
 
-## 1. Validate current capability and format
+## 1. Detect target environments
 
-Before proposing files, check the current official documentation and, when possible, the installed Cursor version.
+Before proposing files, identify which agent environments the project and team actually use.
 
-Official references:
+Look for repository signals:
 
-- Rules: <https://cursor.com/docs/rules>
-- Agent Skills: <https://cursor.com/docs/skills>
-- Subagents: <https://cursor.com/docs/subagents>
+- `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`;
+- `.cursor/` (rules, skills, agents);
+- `.claude/` (settings, skills, agents);
+- `.codex/`;
+- `.gemini/`;
+- `.agents/skills/`;
+- `.github/copilot-instructions.md`, `.github/instructions/`, `.github/agents/`.
 
-Do not blindly reuse old examples. Confirm:
+When the signals are absent or ambiguous, ask the user which environments the team uses. Record each unused environment as "not applicable". Do not invent adapters for environments nobody uses.
+
+## 1.1 Validate current capability and format
+
+For each approved target environment, check the current official documentation and, when possible, the installed version. Do not invent fields, directories, or activation modes.
+
+Official references (validate against the live docs; do not treat this table as frozen):
+
+| Layer / environment | Typical paths | Official docs to validate |
+| --- | --- | --- |
+| Portable — AGENTS.md | `AGENTS.md` (root and nested when supported) | <https://agents.md/> |
+| Portable — Agent Skills | `.agents/skills/<skill-name>/SKILL.md` | <https://agentskills.io/home> |
+| Cursor | `.cursor/rules/`, `.cursor/skills/`, `.cursor/agents/` | Rules <https://cursor.com/docs/rules>; Skills <https://cursor.com/docs/skills>; Subagents <https://cursor.com/docs/subagents> |
+| Claude Code | `CLAUDE.md` (import portable content with `@AGENTS.md`), `.claude/skills/`, `.claude/agents/` | Claude Code docs for CLAUDE.md, skills, and subagents |
+| Codex | `AGENTS.md` (root/nested; may also read `~/.codex/AGENTS.md`), `.agents/skills/` | Codex docs for AGENTS.md and Agent Skills; respect documented size caps |
+| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/`, `.github/agents/*.agent.md` | Copilot coding-agent and custom-agents docs |
+| Gemini CLI | `AGENTS.md` and/or `GEMINI.md` via `.gemini/settings.json` | Gemini CLI context/settings docs |
+
+Confirm per environment:
 
 - recognized directories;
 - required extension and frontmatter;
@@ -47,7 +70,8 @@ Do not blindly reuse old examples. Confirm:
 - support for globs or paths;
 - automatic discovery and manual invocation;
 - accepted fields for model, tools, and read-only mode;
-- behavior in monorepos and multi-root workspaces.
+- behavior in monorepos and multi-root workspaces;
+- size or context caps (for example, Codex AGENTS.md limits).
 
 If a field cannot be confirmed, do not invent it. Mark it for validation.
 
@@ -77,14 +101,35 @@ A choice map between agents and skills when selection is not obvious.
 
 Do not copy the same explanation into all these places. Use references to the canonical source.
 
-## 2.1 Portable governance with AGENTS.md
+## 2.1 Portable governance as the canonical layer
 
-When to propose a canonical `AGENTS.md` (a portable standard supported by Claude Code, Codex, Copilot, and other agent-aware tools) as a complementary portable layer to `.cursor/`:
+Prefer portable standards first. Environment-specific files are adapters, not parallel sources of truth.
 
-- the project uses multiple agents or IDEs, not only Cursor; or
-- there are rules that are not Cursor-specific and would benefit from a single portable source.
+### AGENTS.md
 
-Admission test: propose `AGENTS.md` only when at least one of the conditions above is true. The Cursor Rules must reference `AGENTS.md` instead of duplicating its content. In Cursor-only projects, record "not applicable" to avoid duplication.
+Treat a root `AGENTS.md` as the default portable instruction layer when at least one of the following is true:
+
+- the project uses more than one agent environment; or
+- there are rules that are not specific to a single environment and would benefit from a single portable source; or
+- the team wants a single entry point even for a single environment that already reads AGENTS.md natively (Codex, Cursor, Copilot, Gemini CLI, and others).
+
+Admission test for environment-specific instruction files:
+
+- create or keep `CLAUDE.md`, `.github/copilot-instructions.md`, `GEMINI.md`, Cursor rules, or equivalents only for content that is not portable (hooks, environment-only wiring, format-specific frontmatter, environment-only activation);
+- those files must reference `AGENTS.md` (or the canonical documentation) instead of duplicating shared rules;
+- for Claude Code, the usual bridge is a `CLAUDE.md` that starts with `@AGENTS.md` and then adds only Claude-specific notes.
+
+In single-environment projects where a portable file adds no value beyond an existing environment file, record the decision and avoid duplication.
+
+### Agent Skills (open standard)
+
+Prefer the open Agent Skills format — a directory with `SKILL.md` (YAML frontmatter with at least `name` and `description`, plus Markdown instructions) and optional `scripts/`, `references/`, and `assets/` — under `.agents/skills/` when the approved environments support it.
+
+Admission test for environment-specific skill copies:
+
+- do not create two copies of the same skill in different directories;
+- place a skill under `.cursor/skills/`, `.claude/skills/`, or another environment path only when that environment cannot consume `.agents/skills/` or when an environment-specific extension is required and approved;
+- environment-specific skill wrappers must reference the portable skill or the canonical documentation instead of duplicating the procedure.
 
 ## 3. Admission test for Rules
 
@@ -102,6 +147,8 @@ A testing-specific rule or skill must be conditioned on proven recurring risk (f
 Each planned rule must state:
 
 - purpose;
+- layer: `portable` or a specific environment;
+- path(s) per approved environment;
 - activation mechanism;
 - globs, paths, or scope;
 - canonical documentation source;
@@ -113,7 +160,7 @@ Each planned rule must state:
 
 Avoid vague rules like "write clean code" or "use best practices".
 
-Use always-on rules sparingly. In monorepos, prefer scope close to the application or technology when the current Cursor format supports nested rules.
+Use always-on rules sparingly. In monorepos, prefer scope close to the application or technology when the current environment format supports nested rules.
 
 Consider the following as a catalog, not a mandatory checklist:
 
@@ -144,6 +191,8 @@ A testing-specific skill must be conditioned on proven recurring risk, not on a 
 Each planned skill must contain:
 
 - name and description that allow correct selection;
+- layer: `portable` or a specific environment;
+- path(s) per approved environment;
 - when to use and when not to use;
 - expected inputs;
 - instructions and files to consult;
@@ -155,7 +204,7 @@ Each planned skill must contain:
 - warning signs and human escalation;
 - scripts, references, or assets only if necessary.
 
-Consciously decide between a Cursor-specific location and the portable standard supported by the current version. Do not create two copies of the same skill in different directories.
+Prefer `.agents/skills/<skill-name>/SKILL.md` when supported. Consciously decide between a portable location and an environment-specific location supported by the current version. Do not create two copies of the same skill in different directories.
 
 For rare or context-expensive skills, evaluate manual invocation or an equivalent mechanism supported by the current version. Do not add frontmatter fields without official confirmation.
 
@@ -227,9 +276,12 @@ Create a specialized agent only when at least one condition is true:
 
 Do not create agents just because frontend, backend, and database exist.
 
+Plan the mission, triggers, responsibilities, inputs, tools, permissions, change limits, escalation, delivery format, quality criteria, and stopping conditions in environment-neutral terms first. Then map each approved agent to the subagent or custom-agent format of each approved environment. Subagents are the least portable mechanism; do not invent a shared format across environments.
+
 Each planned agent must define:
 
 - mission;
+- layer: `portable` (mission definition) and environment-specific path(s);
 - usage triggers;
 - responsibilities;
 - inputs;
@@ -242,7 +294,7 @@ Each planned agent must define:
 - quality criteria;
 - scope limits and stopping conditions.
 
-Reviewers, security auditors, and production agents should operate in read-only mode by default, when the current Cursor allows.
+Reviewers, security auditors, and production agents should operate in read-only mode by default, when the current environment allows.
 
 Consider the following as a catalog of possible specializations:
 
@@ -287,6 +339,7 @@ With zero or one agent, do not create a router.
 For each artifact, check:
 
 - whether another one already covers the same responsibility;
+- whether portable content is duplicated into an environment adapter;
 - whether the description is specific enough for correct activation;
 - whether an always-on rule is really necessary;
 - whether a skill should be manual;
@@ -319,23 +372,24 @@ This section is an application of the canonical principle in `00-HOW-TO-USE.md` 
 
 # Agentic Governance Plan
 
-## 1. Environment capabilities
+## 1. Target environments and capability matrix
 
-Observed version or limitations and formats that need confirmation.
+Approved environments, observed signals, version or format limitations, and fields that need confirmation. Mark unused environments as "not applicable".
 
 ## 2. Existing governance
 
-What will be preserved, updated, consolidated, or considered obsolete, without making changes.
+What will be preserved, updated, consolidated, or considered obsolete, without making changes. Include portable files and environment-specific adapters.
 
 ## 3. Needs matrix
 
-Relate risks and recurring tasks to the simplest solution type: documentation, rule, skill, agent, or no change.
+Relate risks and recurring tasks to the simplest solution type: documentation, portable instruction, rule, skill, agent, or no change.
 
 ## 4. Proposed Rules
 
 For each one:
 
-- path;
+- layer: `portable` or `<environment>`;
+- path(s);
 - action;
 - trigger and scope;
 - reason and evidence;
@@ -349,7 +403,8 @@ For each one:
 
 For each one:
 
-- path;
+- layer: `portable` or `<environment>`;
+- path(s);
 - action;
 - trigger;
 - procedure solved;
@@ -364,7 +419,7 @@ For each one:
 
 For each one:
 
-- path;
+- layer and environment-specific path(s);
 - mission;
 - justification;
 - minimal tools and permissions;

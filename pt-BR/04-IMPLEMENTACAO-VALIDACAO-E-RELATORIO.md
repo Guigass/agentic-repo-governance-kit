@@ -73,7 +73,7 @@ Faça uma verificação direcionada das evidências utilizadas pelo arquivo que 
 - confirme que caminhos e símbolos continuam existindo;
 - confirme que o working tree não mudou materialmente desde o diagnóstico;
 - confirme que a documentação canônica escolhida continua adequada;
-- confirme a sintaxe atual de rules, skills e agents antes de criá-los;
+- confirme a sintaxe atual de rules, skills e agents para cada ambiente-alvo aprovado antes de criá-los;
 - registre qualquer deriva que invalide o plano. No modo `REAUDITORIA`, registre também a deriva entre auditorias — o delta entre o estado atual do código e a documentação ou governança existente produzida pela auditoria anterior.
 
 Se a deriva alterar materialmente o plano, pare e solicite nova aprovação.
@@ -96,7 +96,9 @@ Ao criar ou atualizar documentos:
 
 Para cada rule aprovada:
 
-- use o diretório, extensão e frontmatter suportados pela versão atual;
+- use o diretório, extensão e frontmatter suportados por cada ambiente-alvo aprovado;
+- coloque instruções portáteis em `AGENTS.md` quando essa for a camada aprovada;
+- crie adaptadores específicos de ambiente apenas para conteúdo não portável e referencie a fonte canônica;
 - configure ativação e escopo de forma explícita;
 - mantenha o conteúdo curto e acionável;
 - referencie documentação canônica;
@@ -108,13 +110,14 @@ Para cada rule aprovada:
 
 Para cada skill aprovada:
 
-- use estrutura e frontmatter atuais;
+- prefira o formato aberto Agent Skills sob `.agents/skills/<skill-name>/SKILL.md` quando aprovado e suportado;
+- use um caminho de skill específico de ambiente somente quando aprovado e necessário; não duplique a mesma skill em múltiplas raízes;
+- use a estrutura e o frontmatter suportados pelo ambiente-alvo;
 - deixe a descrição específica para seleção correta;
 - defina entradas, passos, limites, saída e validação;
 - diferencie inspeção, recomendação e execução;
 - inclua gates humanos para ações sensíveis;
 - use scripts ou assets apenas se aprovados e necessários;
-- não duplique a mesma skill em múltiplas raízes;
 - configure invocação automática ou manual conforme o plano e o suporte atual.
 
 Uma skill nunca deve ampliar a autorização recebida na tarefa que a invoca.
@@ -123,7 +126,8 @@ Uma skill nunca deve ampliar a autorização recebida na tarefa que a invoca.
 
 Para cada agent aprovado:
 
-- use formato e frontmatter atuais;
+- mapeie a missão aprovada para o formato de subagent ou custom agent de cada ambiente aprovado;
+- use o formato e o frontmatter suportados por esse ambiente;
 - defina missão limitada;
 - conceda ferramentas e permissões mínimas;
 - use modo somente leitura por padrão para análise e revisão, quando suportado;
@@ -151,8 +155,9 @@ Execute verificações somente locais, seguras e proporcionais.
 
 ### Governança agêntica
 
-- nomes de arquivos e diretórios são reconhecidos pela versão atual;
-- frontmatter é válido;
+- nomes de arquivos e diretórios são reconhecidos por cada ambiente-alvo aprovado;
+- frontmatter é válido para cada ambiente que recebe um adaptador;
+- conteúdo portável não está duplicado em arquivos específicos de ambiente;
 - rules possuem ativação e escopo coerentes;
 - skills têm gatilhos claros e procedimentos completos;
 - agents têm responsabilidade e limites claros;

@@ -11,8 +11,8 @@ Criar ou melhorar, quando houver justificativa no projeto real:
 - documentação técnica e arquitetural;
 - documentação de módulos, domínio, fluxos críticos e integrações;
 - guias de desenvolvimento, ambiente, testes, deploy e troubleshooting;
-- Cursor Rules específicas e corretamente delimitadas;
-- Skills operacionais e reutilizáveis;
+- instruções portáteis de agentes (`AGENTS.md`) e rules específicas de ambiente quando justificadas;
+- Skills operacionais e reutilizáveis, preferindo o padrão aberto Agent Skills;
 - Agents especializados e um router, quando trouxerem benefício real;
 - mecanismos para manter documentação e governança sincronizadas com o projeto.
 
@@ -23,7 +23,7 @@ O pacote não autoriza alterações funcionais na aplicação.
 1. Execute [01-DESCOBERTA-E-DIAGNOSTICO.md](01-DESCOBERTA-E-DIAGNOSTICO.md).
 2. Revise o diagnóstico e corrija eventuais conclusões.
 3. Execute [02-ARQUITETURA-DOCUMENTAL-E-PLANO.md](02-ARQUITETURA-DOCUMENTAL-E-PLANO.md).
-4. Execute [03-GOVERNANCA-CURSOR-E-PLANO.md](03-GOVERNANCA-CURSOR-E-PLANO.md).
+4. Execute [03-GOVERNANCA-AGENTICA-E-PLANO.md](03-GOVERNANCA-AGENTICA-E-PLANO.md).
 5. Aprove, rejeite ou ajuste o plano consolidado.
 6. Somente após aprovação explícita, execute [04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md](04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md).
 

@@ -84,7 +84,7 @@ O preflight pode usar uma inspeção mínima para localizar a raiz, as instruç�
 Antes da análise arquitetural:
 
 1. Identifique instruções explícitas do usuário.
-2. Procure arquivos de governança aplicáveis, como `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.cursor/skills/`, `.cursor/agents/`, `CONTRIBUTING.md` e equivalentes.
+2. Procure arquivos de governança aplicáveis, como `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/`, `.cursor/skills/`, `.cursor/agents/`, `.claude/` (settings, skills, agents), `.codex/`, `.agents/skills/`, `.github/copilot-instructions.md`, `.github/instructions/`, `.github/agents/`, `CONTRIBUTING.md` e equivalentes.
 3. Leia apenas os arquivos relevantes para a tarefa, respeitando escopo e hierarquia.
 4. Registre conflitos entre instruções, documentação e comportamento observado.
 5. Não dependa da existência de uma skill customizada para começar, mas respeite instruções aplicáveis já existentes.

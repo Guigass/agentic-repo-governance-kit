@@ -13,7 +13,7 @@ Produce a next version of the kit that is more accurate, safer, and more proport
 Trigger this workflow when one or more of the following are true:
 
 - A new AI model generation changes how agents read, sample, or follow prompts.
-- New agent/IDE capabilities appear (new Cursor Rules/Skills/Agents formats, new subagent mechanisms, new scoping or read-only options).
+- New agent/IDE capabilities appear (new Rules/Skills/Agents formats across Cursor, Claude Code, Codex, Copilot, Gemini CLI, or other environments; new portable standards; new subagent mechanisms; new scoping or read-only options).
 - A new portable standard emerges or changes (for example, `AGENTS.md` support across Claude Code, Codex, Copilot).
 - A new recurring directive is needed (security, testing, privacy, cost-effectiveness, or another concern proven by real usage).
 - Feedback from real executions shows a failure mode, ambiguity, or excess bureaucracy.
