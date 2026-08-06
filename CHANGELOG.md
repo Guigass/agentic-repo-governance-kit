@@ -13,6 +13,10 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 ### Changed
 - Bootstrap and orchestrator prompts pinned to `/v1.1.0/`.
 
+### Migration
+- Pinned executions against `v1.0.0` remain valid on that tag.
+- New executions should point raw URLs at `/v1.1.0/`.
+
 ## [v1.0.0] - 2026-08-06
 ### Added
 - Multi-environment capability matrix in Part 3 covering portable layers (`AGENTS.md`, open Agent Skills under `.agents/skills/`) and first-class adapters for Cursor, Claude Code, Codex, GitHub Copilot, and Gemini CLI.
