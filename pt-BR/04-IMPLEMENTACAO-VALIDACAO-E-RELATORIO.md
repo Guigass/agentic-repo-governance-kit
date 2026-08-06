@@ -64,6 +64,8 @@ Não edite se houver sobreposição insegura com mudanças preexistentes que nã
 - Não execute comandos com efeitos externos.
 - Não faça commit, stage, push, PR, release ou publicação sem pedido explícito adicional.
 
+Estas regras são uma aplicação do princípio canônico em `00-COMO-USAR.md` (ver Princípios preservados): nenhuma diretiva deste kit autoriza mutação em produção, bancos de dados, deploy ou estado externo; exige autorização humana separada.
+
 ## 1. Revalidar antes de escrever
 
 Faça uma verificação direcionada das evidências utilizadas pelo arquivo que será alterado:
@@ -72,7 +74,7 @@ Faça uma verificação direcionada das evidências utilizadas pelo arquivo que 
 - confirme que o working tree não mudou materialmente desde o diagnóstico;
 - confirme que a documentação canônica escolhida continua adequada;
 - confirme a sintaxe atual de rules, skills e agents antes de criá-los;
-- registre qualquer deriva que invalide o plano.
+- registre qualquer deriva que invalide o plano. No modo `REAUDITORIA`, registre também a deriva entre auditorias — o delta entre o estado atual do código e a documentação ou governança existente produzida pela auditoria anterior.
 
 Se a deriva alterar materialmente o plano, pare e solicite nova aprovação.
 
@@ -88,7 +90,7 @@ Ao criar ou atualizar documentos:
 - indique comandos não verificados;
 - use diagramas somente quando aprovados e sustentados por evidência;
 - inclua metadados somente quando tiverem função de manutenção;
-- evite documentos vazios ou preenchidos com “não identificado” sem utilidade operacional.
+- evite documentos vazios ou preenchidos com "não identificado" sem utilidade operacional.
 
 ## 3. Implementar Rules
 
@@ -161,10 +163,12 @@ Execute verificações somente locais, seguras e proporcionais.
 ### Segurança
 
 - nenhum secret, token, senha ou valor real de ambiente foi introduzido;
-- nenhum dado pessoal ou sensível foi reproduzido;
+- nenhum dado pessoal ou sensível, incluindo PII, foi reproduzido;
 - nenhum comando destrutivo foi documentado sem contexto, alerta e gate humano;
 - nenhuma instrução concede autonomia sobre produção ou sistemas externos;
-- nenhuma mudança funcional entrou no diff.
+- nenhuma mudança funcional entrou no diff;
+- caminhos de autenticação, autorização, pagamento e produção não foram enfraquecidos ou contornados pela documentação ou governança escrita;
+- exposição de dados sensíveis em logs, documentação gerada ou relatórios foi verificada e sinalizada.
 
 ### Working tree e diff
 

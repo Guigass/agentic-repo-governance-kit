@@ -39,7 +39,13 @@ Definir exatamente:
 8. Uma ausência relevante pode ser documentada, mas não deve gerar um arquivo vazio.
 9. Comandos não executados devem ser marcados como não verificados.
 10. Caminhos, nomes e exemplos devem vir do repositório real.
-11. Não use “proporcionalidade” como justificativa genérica para deixar sem tratamento uma lacuna P0 ou P1 comprovada.
+11. Não use "proporcionalidade" como justificativa genérica para deixar sem tratamento uma lacuna P0 ou P1 comprovada.
+
+## Entrevista de contexto antes do plano
+
+Antes de detalhar o plano, se o diagnóstico (Parte 1 §18) contiver perguntas materiais não respondidas, conduza uma entrevista mínima de contexto com o usuário. Cubra: propósito do projeto, público-alvo, profundidade desejada, decisões pendentes e restrições.
+
+Proporcionalidade: a entrevista só ativa quando houver lacunas materiais. Em `ENXUTO`, rode uma única rodada curta. Em `PROFUNDO`, rode múltiplas rodadas por área. Registre as respostas como insumo do plano e cite-as onde alterarem uma decisão.
 
 ## 1. Definir a hierarquia de fontes
 
@@ -76,6 +82,8 @@ Um documento novo só deve entrar no plano se houver resposta concreta para:
 7. Que mudança futura deve provocar sua revisão?
 8. Quem ou qual processo consegue mantê-lo?
 9. Qual risco é reduzido por sua existência?
+
+A pergunta 6 é obrigatória e decisiva: se atualizar a documentação existente for suficiente, não crie um novo artefato. Registre a resposta explicitamente no plano por arquivo.
 
 Se essas respostas forem fracas, preserve, consolide ou não crie o artefato.
 
@@ -169,7 +177,7 @@ Devem conter pré-requisitos, setup, comandos comprovados ou marcados como não 
 
 ### Testes
 
-Deve distinguir testes existentes, validações manuais, lacunas e recomendações. Não apresentar uma estratégia desejada como se já estivesse implementada.
+Deve distinguir testes existentes, validações manuais e lacunas. Registre o framework observado, os comandos e a cobertura (não inventada), e separe-os das recomendações. Não apresente uma estratégia desejada como se já estivesse implementada. Marque qualquer métrica não verificada como "validação humana/CI pendente".
 
 ### Deploy e runbooks
 
@@ -181,7 +189,7 @@ Deve partir de sintomas, evidências e locais de observação. Evite receituári
 
 ## 5. Diagramas
 
-Crie diagramas no plano apenas quando facilitarem relações que seriam difíceis de entender em texto.
+Crie diagramas no plano apenas quando facilitarem relações que seriam difíceis de entender em texto. Diagramas também podem ser propostos como melhoria de documentação existente, não apenas como artefatos novos.
 
 Cada diagrama proposto deve informar:
 
@@ -284,6 +292,6 @@ Agrupe em P0, P1, P2 e P3.
 
 Finalize informando:
 
-“Plano documental concluído. Nenhum arquivo foi alterado. A criação ou atualização de documentos depende de aprovação explícita e da consolidação com o plano de governança agêntica.”
+"Plano documental concluído. Nenhum arquivo foi alterado. A criação ou atualização de documentos depende de aprovação explícita e da consolidação com o plano de governança agêntica."
 
 Pare e aguarde.

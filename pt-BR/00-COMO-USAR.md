@@ -2,6 +2,8 @@
 
 Este pacote transforma a auditoria de um repositório em quatro etapas controladas. Ele preserva a essência do prompt original — análise profunda, documentação baseada em evidências, proporcionalidade, segurança e governança útil — sem concentrar descoberta, planejamento e implementação em uma única execução.
 
+Esta é a tradução em português brasileiro da versão canônica em inglês, disponível em [`en/`](../en/).
+
 ## Objetivo
 
 Criar ou melhorar, quando houver justificativa no projeto real:
@@ -27,6 +29,8 @@ O pacote não autoriza alterações funcionais na aplicação.
 
 As partes 2 e 3 podem ser executadas na mesma conversa, mas devem continuar sem editar arquivos.
 
+> Pinning para reprodutibilidade: em produção, aponte as URLs raw usadas para carregar as partes do kit para uma tag de versão específica (por exemplo, `/v1.2.3/pt-BR/00-COMO-USAR.md`) em vez de `main`. Veja a seção "Versionamento" em `README.pt-BR.md`.
+
 ## Gates obrigatórios
 
 ### Gate 1 — Diagnóstico
@@ -41,11 +45,11 @@ As Partes 2 e 3 devem parar depois de listar exatamente o que será criado, atua
 
 A Parte 4 só pode começar se a conversa contiver aprovação inequívoca do conjunto de arquivos e ações. Exemplos válidos:
 
-- “Aprovado o plano completo. Pode implementar.”
-- “Aprovados apenas os itens P0 e P1 da tabela.”
-- “Pode atualizar os três arquivos listados, mas não crie agents.”
+- "Aprovado o plano completo. Pode implementar."
+- "Aprovados apenas os itens P0 e P1 da tabela."
+- "Pode atualizar os três arquivos listados, mas não crie agents."
 
-Frases como “continue”, “veja isso” ou “faça o melhor” não substituem uma aprovação clara quando o plano ainda contiver escolhas materiais.
+Frases como "continue", "veja isso" ou "faça o melhor" não substituem uma aprovação clara quando o plano ainda contiver escolhas materiais.
 
 ## Como transportar contexto entre conversas
 
@@ -69,6 +73,12 @@ O usuário pode informar um modo no início da Parte 1:
 
 O modo altera a quantidade de amostragem e de fluxos rastreados, não reduz as regras de segurança nem autoriza inferências sem evidência.
 
+## Execução multi-agente
+
+Este kit suporta execução multiagente via o orquestrador de cópia única descrito no `README.pt-BR.md`. O orquestrador inicia um especialista por vez, aguarda seu resultado e transporta as evidências para a próxima etapa. Todos os gates humanos são preservados: diagnóstico e planejamento somente leitura, uma única aprovação humana obrigatória antes de qualquer arquivo ser alterado e uma revisão final de QA. Veja a seção "Orquestrador multi-agente de cópia única" no `README.pt-BR.md` para a cadeia completa e os contratos de artefato.
+
+Fallback: se o ambiente não suportar subagents reais ou tarefas delegadas, execute as mesmas funções sequencialmente no agente principal, mantendo todos os gates intactos. Não finja ter criado subagents.
+
 ## Princípios preservados
 
 - Ler antes de escrever.
@@ -81,6 +91,7 @@ O modo altera a quantidade de amostragem e de fluxos rastreados, não reduz as r
 - Manter o estado atual separado de propostas futuras.
 - Explicitar cobertura, limitações e riscos.
 - Revisar o diff e não incluir mudanças alheias à tarefa.
+- Nenhuma diretiva deste kit autoriza mutação em produção, bancos de dados, deploy ou estado externo; exige autorização humana separada.
 
 Proporcionalidade não é permissão para omissão. Quando o diagnóstico comprovar uma lacuna relevante ou um risco recorrente, o plano deve apresentar uma correção concreta — ainda que enxuta — ou justificar objetivamente por que nenhum novo artefato é apropriado.
 
