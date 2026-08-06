@@ -83,6 +83,219 @@ Requisitos:
 Responda em português brasileiro.
 ```
 
+## One-copy multi-agent orchestrator
+
+This option is for environments that support subagents or delegated agent tasks. You paste the prompt once. The orchestrator launches one specialist at a time, waits for its result, and passes the evidence to the next specialist.
+
+The read-only diagnosis and planning stages run without additional prompts. The workflow pauses once for human approval before any file is changed. After approval, continue in the same conversation; you do not need to paste the kit prompts again.
+
+```text
+Atue como o ORQUESTRADOR PRINCIPAL do Agentic Repository Governance Kit.
+
+Kit público:
+https://github.com/Guigass/agentic-repo-governance-kit
+
+O repositório aberto atualmente no workspace é o REPOSITÓRIO ALVO. O repositório do kit é apenas uma fonte de instruções. Nunca trate o kit como alvo da auditoria e nunca altere o repositório do kit.
+
+Objetivo:
+Executar o kit com múltiplos agentes especializados, de forma estritamente sequencial. Cada agente deve concluir sua etapa antes do próximo começar. O orquestrador deve aguardar, validar e transportar o resultado de uma etapa para a seguinte.
+
+Configuração:
+- Profundidade: PADRAO
+- Idioma da entrega: português brasileiro
+- Execução das etapas 1 a 4: somente leitura
+- Escrita no repositório alvo: somente depois de aprovação humana explícita do plano consolidado
+- Commit, push, PR, deploy e acesso a sistemas externos: proibidos sem autorização separada
+
+Primeiro leia:
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/main/00-COMO-USAR.md
+
+REGRAS DO ORQUESTRADOR
+
+1. Use apenas os mecanismos reais de subagents, delegated tasks ou multi-agent disponíveis no ambiente. Não invente chamadas de ferramenta.
+2. O ORQUESTRADOR é o único responsável por iniciar, aguardar, retomar ou encerrar agentes.
+3. Execute os especialistas sequencialmente. Não execute duas etapas em paralelo.
+4. Não inicie o próximo especialista até receber um resultado terminal e utilizável do anterior.
+5. Cada tarefa delegada deve ser autocontida: inclua objetivo, restrições, URL da parte aplicável e os resultados anteriores necessários.
+6. Agentes das fases de descoberta, planejamento e revisão devem operar somente em leitura.
+7. Somente o approved-implementer pode escrever, e apenas depois do gate humano.
+8. Se um agente falhar ou devolver resultado incompleto, esclareça a tarefa e tente retomá-lo uma vez. Se continuar bloqueado, interrompa a cadeia e reporte o bloqueio.
+9. Não permita que um subagent amplie o escopo, conceda autorização a si mesmo ou trate inferência como fato.
+10. Respeite instruções de maior precedência fornecidas pelo sistema, usuário e repositório alvo.
+11. Preserve mudanças preexistentes e não relacionadas no working tree.
+12. Se o ambiente não oferecer multiagentes reais, informe claramente o fallback e execute as mesmas funções sequencialmente no agente principal, mantendo todos os gates. Não finja ter criado subagents.
+
+CADEIA OBRIGATÓRIA
+
+ETAPA 1 — repo-discovery-auditor
+
+Inicie um especialista somente leitura chamado repo-discovery-auditor.
+
+Forneça a ele:
+- o repositório alvo atual;
+- as restrições deste prompt;
+- a Parte 1 do kit:
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/main/01-DESCOBERTA-E-DIAGNOSTICO.md
+
+Tarefa:
+- executar integralmente a descoberta e o diagnóstico;
+- produzir evidências, cobertura, riscos, fluxos críticos e lacunas;
+- não editar nenhum arquivo;
+- devolver um artefato final chamado DIAGNOSTICO_APROVAVEL.
+
+Aguarde a conclusão. Valide se o diagnóstico contém escopo, evidências, limitações e separação entre fatos, inferências, itens não identificados e validação humana. Não avance se estiver materialmente incompleto.
+
+ETAPA 2 — documentation-architect
+
+Somente após concluir a Etapa 1, inicie um especialista somente leitura chamado documentation-architect.
+
+Forneça a ele:
+- o DIAGNOSTICO_APROVAVEL completo;
+- correções factuais já confirmadas, se houver;
+- a Parte 2 do kit:
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/main/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
+
+Tarefa:
+- desenhar a arquitetura documental proporcional;
+- definir fontes canônicas e navegação;
+- separar estado atual de propostas;
+- listar exatamente arquivos a preservar, criar, atualizar, consolidar ou não criar;
+- não editar nenhum arquivo;
+- devolver um artefato final chamado PLANO_DOCUMENTAL.
+
+Aguarde a conclusão. Valide se cada arquivo proposto possui finalidade, público, fonte de verdade, prioridade, risco e forma de manutenção.
+
+ETAPA 3 — cursor-governance-architect
+
+Somente após concluir a Etapa 2, inicie um especialista somente leitura chamado cursor-governance-architect.
+
+Forneça a ele:
+- o DIAGNOSTICO_APROVAVEL;
+- o PLANO_DOCUMENTAL;
+- a Parte 3 do kit:
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/main/03-GOVERNANCA-CURSOR-E-PLANO.md
+
+Tarefa:
+- planejar Rules, Skills, Agents e Router apenas quando justificados;
+- definir tratamento para riscos recorrentes P0 e P1;
+- evitar duplicação com a documentação canônica;
+- validar os formatos suportados pela versão atual do Cursor;
+- não editar nenhum arquivo;
+- devolver um artefato final chamado PLANO_GOVERNANCA.
+
+Aguarde a conclusão. Valide se cada artefato possui gatilho, escopo, fonte canônica, limites de autorização e método de validação.
+
+ETAPA 4 — plan-integrity-reviewer
+
+Somente após concluir a Etapa 3, inicie um revisor independente e somente leitura chamado plan-integrity-reviewer.
+
+Forneça a ele:
+- DIAGNOSTICO_APROVAVEL;
+- PLANO_DOCUMENTAL;
+- PLANO_GOVERNANCA;
+- as restrições deste prompt.
+
+Tarefa:
+- localizar contradições, duplicações, excesso de burocracia e lacunas não tratadas;
+- confirmar que P0 e P1 possuem tratamento;
+- confirmar que não há alteração funcional disfarçada de documentação;
+- confirmar que o plano preserva mudanças preexistentes;
+- produzir uma allowlist exata de arquivos e ações;
+- devolver PLANO_CONSOLIDADO e PARECER_DE_INTEGRIDADE;
+- não editar nenhum arquivo.
+
+Aguarde a conclusão.
+
+GATE HUMANO OBRIGATÓRIO
+
+Após a Etapa 4:
+
+1. Apresente ao usuário um resumo curto do diagnóstico.
+2. Apresente o PLANO_CONSOLIDADO com a allowlist exata de arquivos e ações.
+3. Mostre riscos, itens descartados e dúvidas que alteram materialmente o plano.
+4. Peça aprovação explícita.
+5. Pare. Não inicie implementação enquanto a aprovação não estiver clara.
+
+Permaneça preparado para continuar nesta mesma conversa quando o usuário aprovar todo o plano ou um subconjunto explícito. A resposta do usuário deve ser transformada na ALLOWLIST_APROVADA. Itens não mencionados não estão autorizados.
+
+ETAPA 5 — approved-implementer
+
+Depois da aprovação humana, inicie um único especialista de implementação chamado approved-implementer.
+
+Forneça a ele:
+- ALLOWLIST_APROVADA;
+- DIAGNOSTICO_APROVAVEL;
+- PLANO_DOCUMENTAL;
+- PLANO_GOVERNANCA;
+- PARECER_DE_INTEGRIDADE;
+- a Parte 4 do kit:
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/main/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
+
+Tarefa:
+- implementar somente arquivos e ações presentes na ALLOWLIST_APROVADA;
+- preservar mudanças preexistentes e não relacionadas;
+- não alterar código funcional;
+- não fazer stage, commit, push, PR, deploy ou acesso externo;
+- revisar o diff;
+- devolver IMPLEMENTACAO_REALIZADA, VALIDACOES_EXECUTADAS e PENDENCIAS.
+
+Aguarde a conclusão.
+
+ETAPA 6 — final-qa-reviewer
+
+Depois da implementação, inicie um revisor independente e somente leitura chamado final-qa-reviewer.
+
+Forneça a ele:
+- ALLOWLIST_APROVADA;
+- IMPLEMENTACAO_REALIZADA;
+- VALIDACOES_EXECUTADAS;
+- o diff atual;
+- as regras de validação da Parte 4.
+
+Tarefa:
+- conferir escopo, conteúdo, links, caminhos, frontmatter e navegação;
+- procurar duplicações, contradições, possíveis secrets e mudanças funcionais;
+- distinguir alterações desta tarefa de mudanças preexistentes;
+- devolver QA_APROVADO ou CORRECOES_NECESSARIAS, com evidências;
+- não editar nenhum arquivo.
+
+Aguarde a conclusão.
+
+Se houver CORRECOES_NECESSARIAS dentro da ALLOWLIST_APROVADA, retome o approved-implementer uma vez com a lista exata de correções e depois execute novamente o final-qa-reviewer. Se a correção ampliar o escopo, pare e peça nova aprovação humana.
+
+ENCERRAMENTO
+
+Quando o QA estiver aprovado, o ORQUESTRADOR deve entregar um relatório final consolidado contendo:
+- resumo do diagnóstico;
+- arquitetura documental resultante;
+- Rules, Skills, Agents e Router criados ou atualizados;
+- arquivos criados, atualizados e preservados;
+- validações executadas;
+- limitações e pontos de validação humana;
+- confirmação de que não houve alteração funcional ou ação externa não autorizada;
+- recomendação de commits, sem executar stage ou commit.
+
+Comece agora. Leia o guia do kit e execute a Etapa 1.
+```
+
+### Multi-agent execution model
+
+```text
+repo-discovery-auditor
+        ↓ waits and returns DIAGNOSTICO_APROVAVEL
+documentation-architect
+        ↓ waits and returns PLANO_DOCUMENTAL
+cursor-governance-architect
+        ↓ waits and returns PLANO_GOVERNANCA
+plan-integrity-reviewer
+        ↓ waits and requests HUMAN APPROVAL
+approved-implementer
+        ↓ waits and returns the implementation diff
+final-qa-reviewer
+        ↓ approves or returns one bounded correction cycle
+orchestrator final report
+```
+
 ## Continue to the next stages
 
 After reviewing and correcting the diagnosis, use the next prompt explicitly.
