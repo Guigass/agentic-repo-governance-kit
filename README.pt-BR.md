@@ -27,6 +27,77 @@ Planejamento não é tratado como permissão para escrever. A fase de implementa
 | [`pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md`](pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md) | [`en/03-AGENTIC-GOVERNANCE-AND-PLAN.md`](en/03-AGENTIC-GOVERNANCE-AND-PLAN.md) | Planejamento de Rules, Skills, Agents e Router portáveis e específicos de ambiente | Não |
 | [`pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md`](pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md) | [`en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md`](en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md) | Implementação aprovada, validação e relatório final | Somente após aprovação explícita |
 
+## Skill instalável de auditoria
+
+Quando o agente puder carregar Agent Skills, use [`repo-governance-audit`](.agents/skills/repo-governance-audit/SKILL.md) em vez de colar o bootstrap abaixo. Fonte canônica: [`.agents/skills/repo-governance-audit/`](.agents/skills/repo-governance-audit/).
+
+### Passo 1 — Deixar a skill disponível (primeira vez)
+
+Clone ou baixe este kit e copie a pasta `.agents/skills/repo-governance-audit/` para um local que sua IDE já carregue:
+
+| Ambiente | Copie a pasta para |
+| --- | --- |
+| Cursor (pessoal, todos os projetos) | `~/.cursor/skills/repo-governance-audit/` |
+| Cursor (somente este projeto) | `<repo-alvo>/.cursor/skills/repo-governance-audit/` |
+| Claude Code | `<repo-alvo>/.claude/skills/repo-governance-audit/` |
+| Codex / portável / genérico | `<repo-alvo>/.agents/skills/repo-governance-audit/` |
+
+Mantenha o nome `repo-governance-audit` e preserve `SKILL.md` mais a pasta `references/`. Reinicie ou recarregue a sessão do agente se as skills forem cacheadas.
+
+Exemplo (na raiz do kit, instalação pessoal no Cursor no Windows PowerShell):
+
+```powershell
+Copy-Item -Recurse -Force .agents\skills\repo-governance-audit $HOME\.cursor\skills\repo-governance-audit
+```
+
+Exemplo (instalação portável no repositório alvo):
+
+```bash
+cp -R .agents/skills/repo-governance-audit /caminho/do/repo-alvo/.agents/skills/repo-governance-audit
+```
+
+### Passo 2 — Abrir o repositório que você quer auditar
+
+Abra o repositório **alvo** na IDE (não este kit, a menos que você queira auditar o kit explicitamente).
+
+### Passo 3 — Invocar a skill
+
+No chat do agente, peça por exemplo:
+
+```text
+Execute a skill repo-governance-audit neste repositório.
+Responda em português brasileiro.
+```
+
+### Passo 4 — Responder às perguntas da skill
+
+A skill para duas vezes antes de auditar:
+
+1. **Em qual IDE instalar?** Responda com um de: `cursor` | `claude` | `codex` | `generic`.  
+   Em seguida ela grava a si mesma no repo alvo em **um** path apenas:
+
+   | Escolha | Path gravado no repositório alvo |
+   | --- | --- |
+   | `cursor` | `.cursor/skills/repo-governance-audit/` |
+   | `claude` | `.claude/skills/repo-governance-audit/` |
+   | `codex` | `.agents/skills/repo-governance-audit/` |
+   | `generic` | `.agents/skills/repo-governance-audit/` |
+
+2. **Modo de execução?** Responda com `multiagente` ou `passo a passo`.  
+   - `multiagente`: orquestrador de cópia única com especialistas (faz fallback sequencial se a IDE não tiver subagents reais).  
+   - `passo a passo`: Partes 1→2→3→4 no agente principal, parando em cada gate.
+
+### Passo 5 — Rodar a auditoria e respeitar os gates
+
+Depois dessas respostas, a skill executa o kit completo (Partes 1–4):
+
+1. Revise o diagnóstico da Parte 1; corrija fatos se preciso; continue quando estiver pronto.
+2. Revise o plano documental (Parte 2) e o plano de governança (Parte 3).
+3. Aprove uma allowlist exata de arquivos e ações (“continuar” vago não basta).
+4. Só então a Parte 4 implementa o escopo aprovado e reporta a validação.
+
+Até essa aprovação explícita, a auditoria permanece somente leitura (exceto os arquivos da skill gravados no Passo 4).
+
 ## Início rápido com URL
 
 Use este método com um agente capaz de abrir URLs públicas.
@@ -40,8 +111,8 @@ https://github.com/Guigass/agentic-repo-governance-kit
 O repositório aberto atualmente no seu workspace é o repositório ALVO. O repositório do kit é apenas uma fonte de instruções e não deve ser analisado como alvo.
 
 Primeiro, leia estes arquivos na ordem:
-1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/00-COMO-USAR.md
-2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
+1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/00-COMO-USAR.md
+2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
 
 Execute agora somente a Parte 1, no modo AUDITORIA_SOMENTE_LEITURA e com profundidade PADRAO.
 
@@ -67,7 +138,7 @@ Após revisar e corrigir o diagnóstico, use o próximo prompt explicitamente.
 Continue usando o Agentic Repository Governance Kit.
 
 Leia e execute somente a Parte 2:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
 
 Use o diagnóstico aprovado já presente nesta conversa. Produza a arquitetura documental e o plano exato de arquivos, mas não modifique nenhum arquivo. Pare após o plano.
 ```
@@ -78,7 +149,7 @@ Use o diagnóstico aprovado já presente nesta conversa. Produza a arquitetura d
 Continue usando o Agentic Repository Governance Kit.
 
 Leia e execute somente a Parte 3:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
 
 Use o diagnóstico aprovado e o plano documental já presentes nesta conversa. Produza o plano de Rules, Skills, Agents e Router para os ambientes-alvo aprovados, mas não modifique nenhum arquivo. Pare após o plano.
 ```
@@ -94,7 +165,7 @@ Escopo aprovado:
 [cole aqui os arquivos e ações exatos aprovados]
 
 Leia e execute a Parte 4 do Agentic Repository Governance Kit:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
 
 Implemente somente o escopo aprovado. Preserve mudanças preexistentes e não relacionadas. Não altere código funcional da aplicação. Não faça stage, commit, push, publicação ou acesso a sistemas externos sem autorização separada.
 ```
@@ -124,7 +195,7 @@ Configuração:
 - Commit, push, PR, deploy e acesso a sistemas externos: proibidos sem autorização separada
 
 Primeiro leia:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/00-COMO-USAR.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/00-COMO-USAR.md
 
 REGRAS DO ORQUESTRADOR
 
@@ -161,7 +232,7 @@ Forneça a ele:
 - o repositório alvo atual;
 - as restrições deste prompt;
 - a Parte 1 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/01-DESCOBERTA-E-DIAGNOSTICO.md
 
 Tarefa:
 - executar integralmente a descoberta e o diagnóstico;
@@ -179,7 +250,7 @@ Forneça a ele:
 - o DIAGNOSTICO_APROVAVEL completo;
 - correções factuais já confirmadas, se houver;
 - a Parte 2 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/02-ARQUITETURA-DOCUMENTAL-E-PLANO.md
 
 Tarefa:
 - desenhar a arquitetura documental proporcional;
@@ -199,7 +270,7 @@ Forneça a ele:
 - o DIAGNOSTICO_APROVAVEL;
 - o PLANO_DOCUMENTAL;
 - a Parte 3 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md
 
 Tarefa:
 - detectar ambientes-alvo aprovados e validar seus formatos atuais;
@@ -257,7 +328,7 @@ Forneça a ele:
 - PLANO_GOVERNANCA;
 - PARECER_DE_INTEGRIDADE;
 - a Parte 4 do kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md
 
 Tarefa:
 - implementar somente arquivos e ações presentes na ALLOWLIST_APROVADA;
@@ -338,7 +409,7 @@ Depois peça ao agente para ler `pt-BR/00-COMO-USAR.md` (ou `en/00-HOW-TO-USE.md
 
 Este kit segue [Versionamento Semântico](https://semver.org/). O `CHANGELOG.md` na raiz do repositório é a fonte canônica de mudanças.
 
-Para reprodutibilidade em produção, aponte as URLs raw usadas para carregar as partes do kit para uma tag de versão específica em vez de `main`. Por exemplo, use `/v1.1.0/pt-BR/00-COMO-USAR.md` em vez de `/main/pt-BR/00-COMO-USAR.md`. Os prompts de bootstrap e o orquestrador neste README já estão pinados em uma release com tag.
+Para reprodutibilidade em produção, aponte as URLs raw usadas para carregar as partes do kit para uma tag de versão específica em vez de `main`. Por exemplo, use `/v1.2.0/pt-BR/00-COMO-USAR.md` em vez de `/main/pt-BR/00-COMO-USAR.md`. Os prompts de bootstrap e o orquestrador neste README já estão pinados em uma release com tag.
 
 ## Evoluindo este kit
 

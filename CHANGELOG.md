@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 
 ## [Unreleased]
 
+## [v1.2.0] - 2026-08-06
+### Added
+- Installable audit skill `repo-governance-audit` under `.agents/skills/repo-governance-audit/`: asks for IDE install target (Cursor, Claude Code, Codex, or portable/generic), asks multi-agent vs step-by-step, then runs the full Parts 1–4 kit flow with human gates.
+- Step-by-step install and run guide for the skill in both READMEs; alternative entrypoint note in Part 0 (`en/00-HOW-TO-USE.md`, `pt-BR/00-COMO-USAR.md`).
+
+### Changed
+- Bootstrap, orchestrator, and skill pinned raw URLs to `/v1.2.0/`.
+
+### Migration
+- Pinned executions against `v1.1.0` remain valid on that tag.
+- New executions should point raw URLs at `/v1.2.0/`.
+
 ## [v1.1.0] - 2026-08-06
 ### Added
 - Part 3 evaluation for a `roadmap-planning` skill: catalog entry, admission criteria, required wave-based procedure (read-only until approval, outputs under `docs/roadmap/<plan-name>/`), and a dedicated item in the governance plan format (`en/03-AGENTIC-GOVERNANCE-AND-PLAN.md`, `pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md`).

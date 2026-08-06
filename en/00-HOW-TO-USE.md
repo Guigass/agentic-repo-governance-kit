@@ -71,6 +71,10 @@ The user may state a mode at the start of Part 1:
 
 The mode changes the amount of sampling and traced flows; it does not reduce safety rules nor authorize evidence-free inferences.
 
+## Alternative entrypoint — installable skill
+
+When available, the skill `.agents/skills/repo-governance-audit/` is an alternative to pasting the README bootstrap. It installs itself into the chosen IDE path in the target repo, asks for multi-agent or step-by-step execution, then runs Parts 1–4 with the same gates as this guide. See the "Installable audit skill" section in `README.md`.
+
 ## Multi-agent execution
 
 This kit supports multi-agent execution via the one-copy orchestrator described in `README.md`. The orchestrator launches one specialist at a time, waits for its result, and carries the evidence into the next stage. All human gates are preserved: read-only diagnosis and planning, a single mandatory human approval before any file is changed, and a final QA review. See the "One-copy multi-agent orchestrator" section in `README.md` for the full chain and artifact contracts.

@@ -73,6 +73,10 @@ O usuário pode informar um modo no início da Parte 1:
 
 O modo altera a quantidade de amostragem e de fluxos rastreados, não reduz as regras de segurança nem autoriza inferências sem evidência.
 
+## Entrypoint alternativo — skill instalável
+
+Quando disponível, a skill `.agents/skills/repo-governance-audit/` é uma alternativa a colar o bootstrap do README. Ela se instala no path da IDE escolhida no repositório alvo, pergunta se a execução será multiagente ou passo a passo e então executa as Partes 1–4 com os mesmos gates deste guia. Veja a seção "Skill instalável de auditoria" no `README.pt-BR.md`.
+
 ## Execução multi-agente
 
 Este kit suporta execução multiagente via o orquestrador de cópia única descrito no `README.pt-BR.md`. O orquestrador inicia um especialista por vez, aguarda seu resultado e transporta as evidências para a próxima etapa. Todos os gates humanos são preservados: diagnóstico e planejamento somente leitura, uma única aprovação humana obrigatória antes de qualquer arquivo ser alterado e uma revisão final de QA. Veja a seção "Orquestrador multi-agente de cópia única" no `README.pt-BR.md` para a cadeia completa e os contratos de artefato.
