@@ -342,6 +342,10 @@ Para reprodutibilidade em produção, aponte as URLs raw usadas para carregar as
 
 Quando o ecossistema mudar o suficiente para justificar um novo release (uma nova geração de modelos de IA, novas capacidades de agentes/IDEs, novos padrões portáteis, novas diretivas recorrentes, ou necessidades de manutenção acumuladas), siga [`pt-BR/EVOLUCAO-E-MANUTENCAO.md`](pt-BR/EVOLUCAO-E-MANUTENCAO.md). Ele aplica ao próprio kit o mesmo modelo de segurança em estágios: um autodiagnóstico somente leitura, um plano de evolução, um gate humano obrigatório, implementação em `en/` e depois paridade em `pt-BR/`, validação via os scripts de paridade, e um release registrado no `CHANGELOG.md` com uma nova tag de versão.
 
+## Planejamento de roadmap para uma nova feature
+
+Quando o usuário quiser planejar uma nova feature ou uma nova parte do sistema e precisar de um roadmap estruturado por ondas, fundamentado no projeto real (padrões, arquitetura, runtime, deployment e docs), siga [`pt-BR/PLANEJAMENTO-DE-ROADMAP.md`](pt-BR/PLANEJAMENTO-DE-ROADMAP.md). Ele conduz uma entrevista de contexto e uma análise do projeto em somente leitura, propõe uma divisão por ondas em `docs/roadmap/<nome-do-plano>/`, para em um gate humano obrigatório, e só então escreve os arquivos aprovados do roadmap (visão geral, contexto e um arquivo por onda). Este guia produz apenas o roadmap; ele não implementa a feature.
+
 ## Princípios de design
 
 - Evidência antes de conclusões.

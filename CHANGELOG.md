@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 
 ## [Unreleased]
 
+## [v0.2.0] - 2026-08-06
+### Added
+- Roadmap planning guide for a new feature or system part (`en/ROADMAP-PLANNING.md`, `pt-BR/PLANEJAMENTO-DE-ROADMAP.md`): a read-only-to-approved workflow that analyzes the existing project (patterns, architecture, runtime, deployment, docs) and produces a wave-based roadmap under `docs/roadmap/<plan-name>/` (overview, context, and one file per wave). Reuses the Part 1 diagnosis when one already exists.
+- "Roadmap planning" reference sections in both READMEs.
+
 ## [v0.1.0] - 2026-08-06
 ### Added
 - Bilingual structure: canonical `en/` and parity `pt-BR/` (Parts 00–04).

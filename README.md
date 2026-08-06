@@ -344,6 +344,10 @@ For reproducibility in production, point the raw URLs used to load the kit parts
 
 When the ecosystem changes enough to justify a new release (a new AI model generation, new agent/IDE capabilities, new portable standards, new recurring directives, or accumulated maintenance needs), follow [`en/EVOLUTION-AND-MAINTENANCE.md`](en/EVOLUTION-AND-MAINTENANCE.md). It applies the same staged safety model to the kit itself: a read-only self-diagnosis, an evolution plan, a mandatory human gate, implementation in `en/` then parity in `pt-BR/`, validation via the parity scripts, and a release recorded in `CHANGELOG.md` with a new version tag.
 
+## Roadmap planning for a new feature
+
+When the user wants to plan a new feature or a new part of the system and needs a structured, wave-based roadmap grounded in the real project (patterns, architecture, runtime, deployment, and docs), follow [`en/ROADMAP-PLANNING.md`](en/ROADMAP-PLANNING.md). It runs a read-only context interview and project analysis, proposes a wave breakdown under `docs/roadmap/<plan-name>/`, stops at a mandatory human gate, and only then writes the approved roadmap files (overview, context, and one file per wave). This guide produces the roadmap only; it does not implement the feature.
+
 ## Design principles
 
 - Evidence before conclusions.
