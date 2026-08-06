@@ -222,7 +222,8 @@ Considere o seguinte como catálogo de procedimentos possíveis:
 - revisão de risco de produção;
 - trabalho em módulo legado;
 - preparação de release;
-- revisão de diff e preparação de commit.
+- revisão de diff e preparação de commit;
+- planejamento de roadmap para uma nova feature ou parte do sistema.
 
 Inclua apenas procedimentos suportados por tarefas recorrentes ou riscos reais do repositório.
 
@@ -263,7 +264,30 @@ Qualquer mecanismo proposto deve reforçar:
 - não criar commits, push ou PRs sem autorização explícita;
 - registrar validações e pendências.
 
-## 7. Teste de admissão de Agents
+## 7. Avaliar Planejamento de Roadmap
+
+Não assuma que todo repositório precisa de uma skill `roadmap-planning`.
+
+Crie ou atualize uma skill `roadmap-planning` quando pelo menos uma condição for verdadeira:
+
+- o projeto tem entrega ativa de features ou partes do sistema e vai planejar trabalho em ondas mais de uma vez;
+- humanos ou agents já inventam planos ad hoc sem fundamentar no repositório real;
+- uma estrutura de skills está sendo criada ou atualizada e o projeto não é um experimento descartável.
+
+Prefira uma skill a duplicar um ensaio longo de planejamento em rules always-on. Se a necessidade for rara e pontual, prefira um ponteiro curto no guia de contribuição ou no workflow agêntico, ou nenhum artefato novo.
+
+Quando a skill for proposta, ela deve codificar um procedimento somente-leitura-até-aprovação, por ondas, que:
+
+- reutilize um diagnóstico existente do projeto quando houver, e caso contrário execute uma análise somente leitura escopada;
+- separe o estado atual das ondas propostas;
+- proponha arquivos sob `docs/roadmap/<nome-do-plano>/` (visão geral, contexto e um arquivo por onda; artefatos opcionais mais profundos só quando justificados);
+- pare para aprovação humana explícita antes de escrever qualquer arquivo;
+- produza apenas o roadmap — não deve implementar a feature, alterar código funcional nem mutar produção, bancos, deploy ou estado externo;
+- registre classes de evidência (fato observado, inferência, não identificado, precisa de validação humana) quando forem materiais.
+
+Prefira `.agents/skills/roadmap-planning/SKILL.md` quando suportado. Use um caminho de skills específico do ambiente somente quando aprovado e necessário; não duplique a mesma skill em múltiplas raízes.
+
+## 8. Teste de admissão de Agents
 
 Crie um agent especializado somente quando pelo menos uma condição for verdadeira:
 
@@ -312,7 +336,7 @@ Considere o seguinte como catálogo de especializações possíveis:
 
 Um nome de papel conhecido não é justificativa para criá-lo. Cada agent deve passar no teste de admissão e ter limites diferentes dos demais.
 
-## 8. Avaliar Agent Router
+## 9. Avaliar Agent Router
 
 Crie um router somente quando:
 
@@ -334,7 +358,7 @@ Custo-benefício: roteie tarefas mecânicas, de baixo risco ou somente leitura (
 
 Com zero ou um agent, não crie um router.
 
-## 9. Evitar sobreposição e custo de contexto
+## 10. Evitar sobreposição e custo de contexto
 
 Para cada artefato, verifique:
 
@@ -349,7 +373,7 @@ Para cada artefato, verifique:
 
 Prefira poucos artefatos claros a uma biblioteca extensa que raramente será usada.
 
-## 10. Segurança e escalonamento
+## 11. Segurança e escalonamento
 
 A governança de áreas sensíveis deve exigir aprovação humana antes de ações envolvendo:
 
@@ -441,15 +465,19 @@ Escolha rule, skill, instrução central ou nenhuma criação, com justificativa
 
 Escolha skill, rule, documentação ou nenhuma criação, com justificativa.
 
-## 10. Itens descartados
+## 10. Planejamento de roadmap
+
+Escolha skill, ponteiro em documentação ou nenhuma criação, com justificativa. Se uma skill for proposta, declare caminho, gatilho, saídas por ondas sob `docs/roadmap/<nome-do-plano>/` e o gate humano antes de escrever.
+
+## 11. Itens descartados
 
 Liste rules, skills e agents considerados mas não recomendados.
 
-## 11. Ordem de implementação
+## 12. Ordem de implementação
 
 Agrupe em P0, P1, P2 e P3 e identifique dependências do plano documental.
 
-## 12. Validação humana
+## 13. Validação humana
 
 Decisões que mudariam materialmente o conjunto proposto.
 

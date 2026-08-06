@@ -222,7 +222,8 @@ Consider the following as a catalog of possible procedures:
 - production risk review;
 - work in a legacy module;
 - release preparation;
-- diff review and commit preparation.
+- diff review and commit preparation;
+- roadmap planning for a new feature or system part.
 
 Include only procedures supported by recurring tasks or real repository risks.
 
@@ -263,7 +264,30 @@ Any proposed mechanism must reinforce:
 - do not create commits, push, or PRs without explicit authorization;
 - record validations and pending items.
 
-## 7. Admission test for Agents
+## 7. Evaluate Roadmap Planning
+
+Do not assume every repository needs a `roadmap-planning` skill.
+
+Create or update a `roadmap-planning` skill when at least one condition is true:
+
+- the project has active feature or system-part delivery and will plan work in waves more than once;
+- humans or agents already invent ad-hoc plans without grounding in the real repository;
+- a skills structure is being created or updated and the project is not a throwaway experiment.
+
+Prefer a skill over duplicating a long planning essay into always-on rules. If the need is rare and one-off, prefer a short pointer in the contribution or agentic workflow docs, or no new artifact.
+
+When the skill is proposed, it must encode a read-only-to-approved, wave-based procedure that:
+
+- reuses an existing project diagnosis when one is available, and otherwise runs a scoped read-only analysis;
+- separates current state from proposed waves;
+- proposes files under `docs/roadmap/<plan-name>/` (overview, context, and one file per wave; optional deeper artifacts only when justified);
+- stops for explicit human approval before writing any file;
+- produces the roadmap only — it must not implement the feature, change functional code, or mutate production, databases, deploy, or external state;
+- records evidence classes (observed fact, inference, not identified, needs human validation) where material.
+
+Prefer `.agents/skills/roadmap-planning/SKILL.md` when supported. Use an environment-specific skills path only when approved and necessary; do not duplicate the same skill in multiple roots.
+
+## 8. Admission test for Agents
 
 Create a specialized agent only when at least one condition is true:
 
@@ -312,7 +336,7 @@ Consider the following as a catalog of possible specializations:
 
 A well-known role name is not justification to create it. Each agent must pass the admission test and have boundaries different from the others.
 
-## 8. Evaluate Agent Router
+## 9. Evaluate Agent Router
 
 Create a router only when:
 
@@ -334,7 +358,7 @@ Cost-effectiveness: route mechanical, low-risk, or read-only tasks (formatting, 
 
 With zero or one agent, do not create a router.
 
-## 9. Avoid overlap and context cost
+## 10. Avoid overlap and context cost
 
 For each artifact, check:
 
@@ -349,7 +373,7 @@ For each artifact, check:
 
 Prefer a few clear artifacts over an extensive library that will rarely be used.
 
-## 10. Safety and escalation
+## 11. Safety and escalation
 
 Governance for sensitive areas must require human approval before actions involving:
 
@@ -441,15 +465,19 @@ Choose rule, skill, central instruction, or no creation, with justification.
 
 Choose skill, rule, documentation, or no creation, with justification.
 
-## 10. Discarded items
+## 10. Roadmap planning
+
+Choose skill, documentation pointer, or no creation, with justification. If a skill is proposed, state path, trigger, wave-based outputs under `docs/roadmap/<plan-name>/`, and the human gate before writing.
+
+## 11. Discarded items
 
 List rules, skills, and agents considered but not recommended.
 
-## 11. Implementation order
+## 12. Implementation order
 
 Group into P0, P1, P2, and P3 and identify dependencies on the documentation plan.
 
-## 12. Human validation
+## 13. Human validation
 
 Decisions that would materially change the proposed set.
 

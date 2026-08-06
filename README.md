@@ -40,8 +40,8 @@ https://github.com/Guigass/agentic-repo-governance-kit
 The repository currently open in your workspace is the TARGET repository. The kit repository is only an instruction source and must not be analyzed as the target.
 
 First, read these files in order:
-1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/00-HOW-TO-USE.md
-2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/00-HOW-TO-USE.md
+2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Execute only Part 1 now, using READ_ONLY_AUDIT and STANDARD depth.
 
@@ -69,7 +69,7 @@ After reviewing and correcting the diagnosis, use the next prompt explicitly.
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 2:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Use the approved diagnosis already present in this conversation. Produce the documentation architecture and exact file plan, but do not modify any files. Stop after the plan.
 ```
@@ -80,7 +80,7 @@ Use the approved diagnosis already present in this conversation. Produce the doc
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 3:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Use the approved diagnosis and documentation plan already present in this conversation. Produce the Rules, Skills, Agents, and Router plan for the approved target environments, but do not modify any files. Stop after the plan.
 ```
@@ -96,7 +96,7 @@ Approved scope:
 [paste the exact approved files and actions here]
 
 Read and execute Part 4 of the Agentic Repository Governance Kit:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Implement only the approved scope. Preserve unrelated and pre-existing changes. Do not change functional application code. Do not stage, commit, push, publish, or access external systems unless separately authorized.
 ```
@@ -126,7 +126,7 @@ Configuration:
 - Commit, push, PR, deploy, and access to external systems: forbidden without separate authorization
 
 Read first:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/00-HOW-TO-USE.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/00-HOW-TO-USE.md
 
 ORCHESTRATOR RULES
 
@@ -163,7 +163,7 @@ Provide it with:
 - the current target repository;
 - the restrictions in this prompt;
 - Part 1 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Task:
 - fully execute discovery and diagnosis;
@@ -181,7 +181,7 @@ Provide it with:
 - the complete APPROVABLE_DIAGNOSIS;
 - confirmed factual corrections, if any;
 - Part 2 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Task:
 - design the proportional documentation architecture;
@@ -201,7 +201,7 @@ Provide it with:
 - the APPROVABLE_DIAGNOSIS;
 - the DOCUMENTATION_PLAN;
 - Part 3 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Task:
 - detect approved target environments and validate their current formats;
@@ -259,7 +259,7 @@ Provide it with:
 - GOVERNANCE_PLAN;
 - INTEGRITY_ASSESSMENT;
 - Part 4 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.0.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Task:
 - implement only files and actions present in the APPROVED_ALLOWLIST;
@@ -348,7 +348,7 @@ When the ecosystem changes enough to justify a new release (a new AI model gener
 
 ## Roadmap planning for a new feature
 
-When the user wants to plan a new feature or a new part of the system and needs a structured, wave-based roadmap grounded in the real project (patterns, architecture, runtime, deployment, and docs), follow [`en/ROADMAP-PLANNING.md`](en/ROADMAP-PLANNING.md). It runs a read-only context interview and project analysis, proposes a wave breakdown under `docs/roadmap/<plan-name>/`, stops at a mandatory human gate, and only then writes the approved roadmap files (overview, context, and one file per wave). This guide produces the roadmap only; it does not implement the feature.
+When the user wants to plan a new feature or a new part of the system and needs a structured, wave-based roadmap grounded in the real project (patterns, architecture, runtime, deployment, and docs), follow [`en/ROADMAP-PLANNING.md`](en/ROADMAP-PLANNING.md). It runs a read-only context interview and project analysis, proposes a wave breakdown under `docs/roadmap/<plan-name>/`, stops at a mandatory human gate, and only then writes the approved roadmap files (overview, context, and one file per wave). This guide produces the roadmap only; it does not implement the feature. When Parts 1–4 govern a target repository, Part 3 also evaluates installing that same procedure as a project skill (`roadmap-planning`) under `.agents/skills/` when recurring wave-based planning is justified.
 
 ## Design principles
 
