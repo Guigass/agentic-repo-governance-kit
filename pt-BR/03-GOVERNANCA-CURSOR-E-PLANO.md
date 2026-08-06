@@ -77,6 +77,15 @@ Mapa de escolha entre agents e skills quando a seleção não for óbvia.
 
 Não copie a mesma explicação em todos esses lugares. Use referências para a fonte canônica.
 
+## 2.1 Governança portátil com AGENTS.md
+
+Quando propor um `AGENTS.md` canônico (padrão portátil suportado por Claude Code, Codex, Copilot e outras ferramentas agent-aware) como camada portátil complementar a `.cursor/`:
+
+- o projeto usa múltiplos agentes ou IDEs, não apenas Cursor; ou
+- há regras que não são Cursor-specific e que se beneficiariam de uma fonte portátil única.
+
+Teste de admissão: proponha `AGENTS.md` somente quando pelo menos uma das condições acima for verdadeira. As Cursor Rules devem referenciar o `AGENTS.md` em vez de duplicar seu conteúdo. Em projetos só-Cursor, registre "não aplicável" para evitar duplicação.
+
 ## 3. Teste de admissão para Rules
 
 Crie ou atualize uma rule somente quando:
@@ -87,6 +96,8 @@ Crie ou atualize uma rule somente quando:
 - for possível definir quando ela se aplica;
 - as instruções forem curtas, acionáveis e testáveis;
 - não houver uma rule equivalente já existente.
+
+Uma rule ou skill específica de testes deve ser condicionada a risco recorrente comprovado (por exemplo, um fluxo crítico frágil com regressões repetidas). Não transforme governança de testes em requisito universal.
 
 Cada rule planejada deve informar:
 
@@ -100,7 +111,7 @@ Cada rule planejada deve informar:
 - forma de validação;
 - custo ou risco de aplicação excessiva.
 
-Evite rules vagas como “escreva código limpo” ou “use boas práticas”.
+Evite rules vagas como "escreva código limpo" ou "use boas práticas".
 
 Use rules always-on com parcimônia. Em monorepos, prefira escopo próximo à aplicação ou tecnologia quando o formato atual do Cursor suportar rules aninhadas.
 
@@ -127,6 +138,8 @@ Crie ou atualize uma skill somente quando:
 - existir validação objetiva;
 - ela não for apenas uma cópia de documentação;
 - ela não puder ser resolvida adequadamente por uma rule curta.
+
+Uma skill específica de testes deve ser condicionada a risco recorrente comprovado, não a uma expectativa genérica de boas práticas. Não transforme governança de testes em requisito universal.
 
 Cada skill planejada deve conter:
 
@@ -175,7 +188,7 @@ Escolha entre:
 - skill, quando há um procedimento relevante e reutilizável;
 - nenhum artefato novo, quando instruções existentes já cobrem a necessidade.
 
-O preflight deve ser proporcional e não pode criar recursão do tipo “execute a skill antes de poder descobrir a própria skill”.
+O preflight deve ser proporcional e não pode criar recursão do tipo "execute a skill antes de poder descobrir a própria skill".
 
 ## 6. Avaliar Git e change management
 
@@ -265,6 +278,8 @@ O router deve mostrar:
 - necessidade de revisão humana;
 - casos em que não se deve delegar.
 
+Custo-efetividade: roteie tarefas mecânicas, de baixo risco ou somente leitura (formatação, renomeação, buscas) para um modelo leve. Reserve um modelo forte para inferência complexa, arquitetura, segurança e decisões críticas. O gate humano para produção é preservado independentemente do roteamento. Esse critério só se aplica quando o ambiente suporta múltiplos modelos ou agentes; em ambiente de modelo único, registre "não aplicável".
+
 Com zero ou um agent, não crie router.
 
 ## 9. Evitar sobreposição e custo de contexto
@@ -286,7 +301,7 @@ Prefira poucos artefatos claros a uma biblioteca extensa que raramente será usa
 Governança para áreas sensíveis deve exigir aprovação humana antes de ações que envolvam:
 
 - produção;
-- dados pessoais ou sensíveis;
+- dados pessoais ou sensíveis, incluindo PII (dados pessoais e privacidade);
 - pagamentos e fiscal;
 - migrations e alterações destrutivas de dados;
 - autenticação e autorização;
@@ -297,6 +312,8 @@ Governança para áreas sensíveis deve exigir aprovação humana antes de açõ
 - mudança funcional fora do pedido original.
 
 Uma rule ou skill não concede autorização que o usuário não forneceu.
+
+Esta seção é uma aplicação do princípio canônico em `00-COMO-USAR.md` (ver Princípios preservados): nenhuma diretiva deste kit autoriza mutação em produção, bancos de dados, deploy ou estado externo; exige autorização humana separada.
 
 ## Formato obrigatório do plano
 
@@ -359,7 +376,7 @@ Para cada um:
 
 ## 7. Agent Router
 
-Explique se será criado. Se não for, registre o motivo.
+Explique se será criado. Se não for, registre o motivo. Quando o router for criado e o ambiente suportar múltiplos modelos ou agentes, inclua uma justificativa por tarefa da escolha de modelo (leve para tarefas mecânicas ou de baixo risco; forte para inferência complexa, arquitetura, segurança e decisões críticas). Em ambiente de modelo único, registre "não aplicável".
 
 ## 8. Task Preflight
 
@@ -385,6 +402,6 @@ Decisões que alterariam materialmente o conjunto proposto.
 
 Finalize informando:
 
-“Plano de governança concluído. Nenhum arquivo foi alterado. A implementação depende de aprovação explícita do plano consolidado de documentação, rules, skills e agents.”
+"Plano de governança concluído. Nenhum arquivo foi alterado. A implementação depende de aprovação explícita do plano consolidado de documentação, rules, skills e agents."
 
 Pare e aguarde.

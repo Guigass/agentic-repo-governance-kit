@@ -6,7 +6,11 @@ Sua missão nesta etapa é compreender o projeto real e produzir um diagnóstico
 
 ## Modo desta etapa
 
-`AUDITORIA_SOMENTE_LEITURA`
+`AUDITORIA_SOMENTE_LEITURA` — auditoria padrão de um repositório existente.
+
+`AUDITORIA_REPO_VAZIO` — ativa quando o repositório não tem código, ou tem menos que um mínimo relevante de arquivos de código. O inventário registra intenção declarada (README, manifest, scaffolding, roadmaps) em vez de uma arquitetura inexistente. Não infira arquitetura que não seja observável.
+
+`REAUDITORIA` — opt-in. Reaudita um repositório já documentado ou governado por este kit, comparando o estado atual do código com a documentação e a governança existentes, e produzindo um delta de deriva (o que mudou, o que ficou defasado). Não substitui a auditoria inicial.
 
 Se não forem informados pelo usuário, adote:
 
@@ -45,6 +49,8 @@ Pare depois do diagnóstico. Não crie ou altere arquivos.
 - Não assumir que documentação existente está correta ou atualizada.
 - Não tratar ausência de resultado em uma busca limitada como prova absoluta de inexistência.
 
+Estas restrições são uma aplicação do princípio canônico em `00-COMO-USAR.md` (ver Princípios preservados): nenhuma diretiva deste kit autoriza mutação em produção, bancos de dados, deploy ou estado externo; exige autorização humana separada.
+
 ## Task Preflight
 
 Antes da descoberta profunda, apresente um bloco curto:
@@ -65,7 +71,7 @@ Confirme que a etapa é somente leitura e cite restrições adicionais do usuár
 
 ## Riscos iniciais
 
-Riscos já visíveis ou “nenhum risco crítico identificado até o momento”.
+Riscos já visíveis ou "nenhum risco crítico identificado até o momento".
 
 ## Próxima ação segura
 
@@ -124,7 +130,32 @@ Exclua da leitura profunda, salvo justificativa específica:
 - lockfiles extensos, exceto quando necessários para responder a uma dúvida concreta;
 - snapshots volumosos sem relação com o fluxo investigado.
 
-Em monorepos, produza primeiro uma matriz de aplicações e pacotes. Depois aprofunde por deployable, domínio ou área de maior risco. Não leia milhares de arquivos apenas para declarar que o repositório foi “analisado por inteiro”.
+Em monorepos, produza primeiro uma matriz de aplicações e pacotes. Depois aprofunde por deployable, domínio ou área de maior risco. Não leia milhares de arquivos apenas para declarar que o repositório foi "analisado por inteiro".
+
+Quando não houver código para inventariar (`AUDITORIA_REPO_VAZIO`), mapeie a intenção declarada e as lacunas em vez de inferir a arquitetura.
+
+### 3.1 Técnica de amostragem para repositórios grandes
+
+Quando o repositório for grande demais para leitura exaustiva:
+
+1. Monte o mapa primeiro a partir dos manifests e da estrutura de diretórios.
+2. Declare um orçamento de leitura por área (por exemplo: pontos de entrada e orquestração por inteiro; 10–20% dos arquivos por módulo, priorizando wiring, domínio e persistência).
+3. Registre a razão de amostragem de cada área (por exemplo: "12 de 48 arquivos lidos no módulo X, selecionados por centralidade de imports").
+4. Defina um critério de parada: pare quando novos arquivos deixarem de alterar a compreensão arquitetural, e declare isso.
+5. Classifique áreas não amostradas como "não identificado no escopo pesquisado", nunca como "não existe".
+
+### 3.2 Inventário de dependências e supply chain
+
+Sem executar ferramentas de auditoria que consultem serviços externos:
+
+- identifique gerenciadores de dependência, manifests e lockfiles;
+- liste dependências diretas e a estratégia de versão (pinadas, ranges, workspaces);
+- registre pacotes conhecidamente depreciados ou abandonados quando evidente pelo manifest ou pelo conhecimento do repositório, marcando como inferência;
+- anote licenças restritivas ou incomuns quando visíveis;
+- identifique registros privados, código vendorizado ou binários gerenciados manualmente;
+- sinalize a necessidade de varredura de vulnerabilidades (por exemplo, `npm audit`, `pip-audit`, Dependabot ou equivalente em CI) como pendência de validação humana ou de CI, pois exige consultas externas proibidas nesta etapa.
+
+Quando houver evidência observável (manifest, lockfile ou config de CI), registre: contagens de dependências diretas e transitivas, a razão entre versões pinadas e ranges, e sinais de abandono (pacotes sem release recente, apenas espelhados, ou marcados como depreciados). Marque cada métrica com sua fonte de evidência. Não invente métricas quando a evidência estiver ausente.
 
 ## 4. Reconstruir a arquitetura atual
 
@@ -155,6 +186,8 @@ Não conclua arquitetura apenas pelos nomes das pastas. Siga referências reais 
 ## 5. Rastrear fluxos críticos
 
 Selecione fluxos com base em impacto, não em conveniência.
+
+Fluxos que envolvem dados sensíveis, autenticação, pagamentos ou produção são sempre críticos independentemente do modo de profundidade (`ENXUTO`, `PADRAO` ou `PROFUNDO`). Não os despriorize sob proporcionalidade.
 
 Considere críticos os fluxos relacionados a:
 
@@ -206,6 +239,8 @@ Para cada artefato relevante, determine:
 - se deve ser preservado, melhorado, consolidado ou apenas referenciado;
 - como deveria ser atualizado quando o projeto mudar.
 
+Para cada artefato relevante, declare um veredito explícito — `preservar`, `melhorar`, `consolidar` ou `referenciar` — com o critério que o justifica. `melhorar` exige uma deficiência concreta (desatualização, contradição, cobertura ausente de fluxo crítico, navegação quebrada), não uma preferência estética. Em `ENXUTO`, concentre os veredictos nos artefatos de maior impacto e registre os demais como `preservar` a menos que uma deficiência seja comprovada.
+
 Não recomende substituição apenas por preferência estética.
 
 ## 7. Modelo obrigatório de evidência
@@ -222,7 +257,7 @@ Conclusão sustentada por sinais concretos, mas não declarada explicitamente. C
 
 ### Não identificado no escopo pesquisado
 
-Descreva onde e como foi procurado. Evite a afirmação absoluta “não existe”.
+Descreva onde e como foi procurado. Evite a afirmação absoluta "não existe".
 
 ### Precisa de validação humana
 
@@ -259,10 +294,12 @@ Propósito provável, stack, tamanho, complexidade e conclusão principal.
 ## 2. Escopo e cobertura
 
 - analisado profundamente;
-- analisado por amostragem;
+- analisado por amostragem, com a razão por área;
 - excluído;
 - limitações;
 - comandos ou técnicas de inspeção utilizados.
+
+Quando aplicável, declare explicitamente "repositório vazio ou quase vazio — sem arquitetura observável" para que as próximas partes não inferirem uma estrutura que não existe.
 
 ## 3. Mapa do repositório
 
@@ -290,41 +327,68 @@ Somente quando aplicável.
 
 ## 9. Segurança e acesso
 
-Autenticação, autorização, dados sensíveis e limites do que foi possível comprovar.
+Mapeie a superfície de ataque com classificação de evidência:
 
-## 10. Testes e validação
+- autenticação e autorização (mecanismos, provedores, tratamento de sessão, fronteiras de privilégio);
+- secrets e credenciais (armazenamento, sinais de rotação, exposição em código ou config);
+- exposição de endpoints (rotas públicas, superfícies administrativas, APIs internas, webhooks);
+- dependências vulneráveis ou abandonadas que ampliam a superfície de ataque;
+- caminhos de acesso à produção e seus controles;
+- os limites do que foi possível comprovar.
 
-Estratégia observada, comandos identificados, cobertura aparente e lacunas.
+Para dados pessoais e privacidade (PII), não os liste novamente aqui. Veja a subseção "Dados pessoais e privacidade" abaixo.
 
-## 11. Ambiente, build, deploy e operação
+### Dados pessoais e privacidade
+
+Mapeie a PII observada com classificação de evidência:
+
+- campos que contêm ou transportam dados pessoais (entradas, payloads, persistência, logs);
+- fluxos que movem dados pessoais entre serviços ou integrações externas;
+- armazenamento de dados pessoais (bancos, caches, arquivos, analytics, backups);
+- dados pessoais aparecendo em logs, traces ou documentação gerada;
+- classificações marcadas como inferência quando não explícitas no repositório.
+
+Quando aplicável, sinalize o alinhamento com LGPD/GDPR como questão de validação humana — o kit não pode comprovar conformidade legal apenas pelo repositório. Sinalize também o risco de expor dados pessoais na documentação ou nos relatórios que este kit produz.
+
+## 10. Dependências e supply chain
+
+Dependências diretas, estratégia de versão, riscos evidentes e varreduras externas pendentes. Registre contagens (diretas e transitivas, pinadas versus ranges) e sinais de abandono apenas quando sustentadas por evidência observável (manifest, lockfile ou config de CI); caso contrário, marque como "validação humana/CI pendente".
+
+## 11. Testes e validação
+
+Qualitativo: framework de testes presente, comandos identificados, cobertura observada (não inventada) e lacunas. Quantitativo: contagens de testes e métricas de cobertura, além de métricas de dependências, somente quando sustentadas por evidência observável (lockfile, relatório de cobertura, config de CI); quando ausente, marque como "validação humana/CI pendente". Não invente métricas nem apresente uma estratégia desejada como se já estivesse implementada.
+
+## 12. Ambiente, build, deploy e operação
 
 Fatos observados e itens não identificados no escopo pesquisado.
 
-## 12. Documentação existente
+## 13. Documentação existente
 
 Artefatos relevantes, qualidade, divergências e duplicações.
 
-## 13. Governança agêntica existente
+## 14. Governança agêntica existente
 
 Rules, skills, agents, arquivos de instrução e comportamento aparente.
 
-## 14. Registro de divergências
+## 15. Registro de divergências
 
 Diferenças entre documentação, código, configuração, testes e automações.
 
-## 15. Lacunas e riscos priorizados
+## 16. Lacunas e riscos priorizados
 
 Tabela com prioridade, impacto, confiança, evidência e recomendação.
 
-## 16. Nível recomendado
+## 17. Nível recomendado
 
 Classifique a futura estrutura como enxuta, média ou completa e justifique.
 
-## 17. Validação humana necessária
+## 18. Validação humana necessária
 
 Perguntas objetivas e de alto impacto. Não transforme toda incerteza pequena em pergunta.
 
-## 18. Insumos para as próximas partes
+Quando houver lacunas materiais que alterariam o plano documental, registre as perguntas que alimentarão a "entrevista de contexto" da Parte 2 (propósito, público-alvo, profundidade desejada, decisões pendentes, restrições).
+
+## 19. Insumos para as próximas partes
 
 Liste necessidades documentais e agênticas sem ainda definir ou criar todos os arquivos.
 
@@ -332,6 +396,6 @@ Liste necessidades documentais e agênticas sem ainda definir ou criar todos os 
 
 Finalize informando:
 
-“Diagnóstico concluído em modo somente leitura. Nenhum arquivo foi alterado. A próxima etapa é desenhar a arquitetura documental e o plano de mudanças.”
+"Diagnóstico concluído em modo somente leitura. Nenhum arquivo foi alterado. A próxima etapa é desenhar a arquitetura documental e o plano de mudanças."
 
 Pare e aguarde a próxima instrução.
