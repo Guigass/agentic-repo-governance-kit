@@ -27,6 +27,77 @@ Planning is not treated as permission to write. The implementation phase require
 | [`en/03-AGENTIC-GOVERNANCE-AND-PLAN.md`](en/03-AGENTIC-GOVERNANCE-AND-PLAN.md) | [`pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md`](pt-BR/03-GOVERNANCA-AGENTICA-E-PLANO.md) | Portable and environment-specific Rules, Skills, Agents, and Router planning | No |
 | [`en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md`](en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md) | [`pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md`](pt-BR/04-IMPLEMENTACAO-VALIDACAO-E-RELATORIO.md) | Approved implementation, validation, and final report | Only after explicit approval |
 
+## Installable audit skill
+
+When the agent can load Agent Skills, use [`repo-governance-audit`](.agents/skills/repo-governance-audit/SKILL.md) instead of pasting the bootstrap below. Canonical source: [`.agents/skills/repo-governance-audit/`](.agents/skills/repo-governance-audit/).
+
+### Step 1 — Make the skill available (first time)
+
+Clone or download this kit, then copy the folder `.agents/skills/repo-governance-audit/` into a location your IDE already loads:
+
+| Environment | Copy the folder to |
+| --- | --- |
+| Cursor (personal, all projects) | `~/.cursor/skills/repo-governance-audit/` |
+| Cursor (this project only) | `<target-repo>/.cursor/skills/repo-governance-audit/` |
+| Claude Code | `<target-repo>/.claude/skills/repo-governance-audit/` |
+| Codex / portable / generic | `<target-repo>/.agents/skills/repo-governance-audit/` |
+
+Keep the directory name `repo-governance-audit` and keep `SKILL.md` plus the `references/` folder inside it. Restart or reload the agent session if skills are cached.
+
+Example (from the kit root, Cursor personal install on Windows PowerShell):
+
+```powershell
+Copy-Item -Recurse -Force .agents\skills\repo-governance-audit $HOME\.cursor\skills\repo-governance-audit
+```
+
+Example (portable install into the target repo):
+
+```bash
+cp -R .agents/skills/repo-governance-audit /path/to/target-repo/.agents/skills/repo-governance-audit
+```
+
+### Step 2 — Open the repository you want to audit
+
+Open the **target** repository in your IDE (not this kit, unless you explicitly want to audit the kit itself).
+
+### Step 3 — Invoke the skill
+
+In the agent chat, ask for example:
+
+```text
+Run the repo-governance-audit skill on this repository.
+Respond in English.
+```
+
+### Step 4 — Answer the skill questions
+
+The skill stops twice before auditing:
+
+1. **Which IDE to install into?** Reply with one of: `cursor` | `claude` | `codex` | `generic`.  
+   The skill then writes itself into the target repo at **one** path only:
+
+   | Choice | Path written in the target repo |
+   | --- | --- |
+   | `cursor` | `.cursor/skills/repo-governance-audit/` |
+   | `claude` | `.claude/skills/repo-governance-audit/` |
+   | `codex` | `.agents/skills/repo-governance-audit/` |
+   | `generic` | `.agents/skills/repo-governance-audit/` |
+
+2. **Execution mode?** Reply with `multi-agent` or `step-by-step`.  
+   - `multi-agent`: one-copy orchestrator with specialists (falls back to sequential roles if the IDE has no real subagents).  
+   - `step-by-step`: Parts 1→2→3→4 in the main agent, stopping at each gate.
+
+### Step 5 — Run the audit and respect the gates
+
+After those answers, the skill runs the full kit (Parts 1–4):
+
+1. Review the Part 1 diagnosis; correct facts if needed; continue when ready.
+2. Review the documentation plan (Part 2) and governance plan (Part 3).
+3. Approve an exact allowlist of files and actions (vague “continue” is not enough).
+4. Only then Part 4 implements the approved scope and reports validation.
+
+Until that explicit approval, the audit stays read-only (except the skill files written in Step 4).
+
 ## Quick start with a URL
 
 Use this method with an agent that can open public web URLs.
@@ -40,8 +111,8 @@ https://github.com/Guigass/agentic-repo-governance-kit
 The repository currently open in your workspace is the TARGET repository. The kit repository is only an instruction source and must not be analyzed as the target.
 
 First, read these files in order:
-1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/00-HOW-TO-USE.md
-2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/00-HOW-TO-USE.md
+2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Execute only Part 1 now, using READ_ONLY_AUDIT and STANDARD depth.
 
@@ -69,7 +140,7 @@ After reviewing and correcting the diagnosis, use the next prompt explicitly.
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 2:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Use the approved diagnosis already present in this conversation. Produce the documentation architecture and exact file plan, but do not modify any files. Stop after the plan.
 ```
@@ -80,7 +151,7 @@ Use the approved diagnosis already present in this conversation. Produce the doc
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 3:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Use the approved diagnosis and documentation plan already present in this conversation. Produce the Rules, Skills, Agents, and Router plan for the approved target environments, but do not modify any files. Stop after the plan.
 ```
@@ -96,7 +167,7 @@ Approved scope:
 [paste the exact approved files and actions here]
 
 Read and execute Part 4 of the Agentic Repository Governance Kit:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Implement only the approved scope. Preserve unrelated and pre-existing changes. Do not change functional application code. Do not stage, commit, push, publish, or access external systems unless separately authorized.
 ```
@@ -126,7 +197,7 @@ Configuration:
 - Commit, push, PR, deploy, and access to external systems: forbidden without separate authorization
 
 Read first:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/00-HOW-TO-USE.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/00-HOW-TO-USE.md
 
 ORCHESTRATOR RULES
 
@@ -163,7 +234,7 @@ Provide it with:
 - the current target repository;
 - the restrictions in this prompt;
 - Part 1 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Task:
 - fully execute discovery and diagnosis;
@@ -181,7 +252,7 @@ Provide it with:
 - the complete APPROVABLE_DIAGNOSIS;
 - confirmed factual corrections, if any;
 - Part 2 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Task:
 - design the proportional documentation architecture;
@@ -201,7 +272,7 @@ Provide it with:
 - the APPROVABLE_DIAGNOSIS;
 - the DOCUMENTATION_PLAN;
 - Part 3 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Task:
 - detect approved target environments and validate their current formats;
@@ -259,7 +330,7 @@ Provide it with:
 - GOVERNANCE_PLAN;
 - INTEGRITY_ASSESSMENT;
 - Part 4 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.1.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.2.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Task:
 - implement only files and actions present in the APPROVED_ALLOWLIST;
