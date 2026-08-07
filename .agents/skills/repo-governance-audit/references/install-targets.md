@@ -19,16 +19,19 @@ Copy or recreate the full skill directory:
 - `references/install-targets.md`
 - `references/execution-modes.md`
 - `references/governance-cleanup.md`
+- `references/update-mode.md`
 
 Source of truth (in order):
 
 1. The skill directory currently loaded / being executed (self-copy).
 2. Local kit clone: `.agents/skills/repo-governance-audit/`.
-3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/.agents/skills/repo-governance-audit/`.
+3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/.agents/skills/repo-governance-audit/`.
 
 ## Overwrite rules
 
+- Before asking where to install, check every known root in the target: an existing install under any of them counts as found.
 - If the destination does not exist: create it and write the files.
-- If it already exists with the same skill name: update the skill files to match the source (overwrite skill content only).
+- If it already exists with the same skill name and the content matches the source: skip writing and record it as already current.
+- If it already exists with the same skill name but outdated content: update the skill files to match the source (overwrite skill content only).
 - If unsure the existing directory is this skill: ask before overwriting unrelated content.
 - Never write outside the chosen skill directory during Phase A.

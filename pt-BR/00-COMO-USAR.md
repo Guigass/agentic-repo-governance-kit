@@ -75,7 +75,7 @@ O modo altera a quantidade de amostragem e de fluxos rastreados, não reduz as r
 
 ## Entrypoint alternativo — skill instalável
 
-Quando disponível, a skill `.agents/skills/repo-governance-audit/` é uma alternativa a colar o bootstrap do README. Ela se instala no path da IDE escolhida no repositório alvo, pergunta se a execução será multiagente ou passo a passo e então executa as Partes 1–4 com os mesmos gates deste guia. Veja a seção "Skill instalável de auditoria" no `README.pt-BR.md`.
+Quando disponível, a skill `.agents/skills/repo-governance-audit/` é uma alternativa a colar o bootstrap do README. Ela primeiro pergunta o que fazer — `full-audit` (Partes 1–4 com os mesmos gates deste guia), `update` (atualização incremental da governança existente via o delta de drift `RE_AUDIT`, com plano de atualização limitado e o mesmo gate de aprovação) ou `install-only` — e então instala ou atualiza a si mesma no path da IDE escolhida quando necessário e executa o modo escolhido. Veja a seção "Skill instalável de auditoria" no `README.pt-BR.md`.
 
 ## Execução multi-agente
 

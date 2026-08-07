@@ -6,6 +6,20 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 
 ## [Unreleased]
 
+## [v1.4.0] - 2026-08-07
+### Added
+- Mode selection in the installable audit skill: `full-audit` (Parts 1–4), `update` (incremental refresh of existing docs, rules, skills, and agents via the kit's `RE_AUDIT` drift delta; new `references/update-mode.md`), and `install-only` (install/refresh the skill without auditing). The skill scans the target first, recommends a default mode, and skips questions already answered in the invocation.
+- Smart install in the skill: detects an existing install under any known root, skips it when current, and refreshes it when outdated; the IDE question is asked only when needed.
+
+### Changed
+- `update` mode always runs step-by-step in the main agent (bounded delta scope); the multi-agent question applies to `full-audit` only.
+- READMEs and Part 0 describe the new skill modes and question flow.
+- Bootstrap, orchestrator, and skill pinned raw URLs to `/v1.4.0/`.
+
+### Migration
+- Pinned executions against `v1.3.0` remain valid on that tag.
+- New executions should point raw URLs at `/v1.4.0/`.
+
 ## [v1.3.0] - 2026-08-06
 ### Added
 - Governance cleanup pass in the installable audit skill (`references/governance-cleanup.md`): when the target already has docs, rules, skills, or agents, Parts 1–3 must plan unify/refactor/remove actions; Part 4 executes only approved path+action items.

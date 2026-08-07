@@ -73,9 +73,15 @@ Respond in English.
 
 ### Step 4 — Answer the skill questions
 
-The skill stops twice before auditing:
+The skill asks up to three short questions and skips any you already answered in the invocation (for example: "Run the repo-governance-audit skill in update mode"):
 
-1. **Which IDE to install into?** Reply with one of: `cursor` | `claude` | `codex` | `generic`.  
+1. **What to do?** Reply with one of: `full-audit` | `update` | `install-only`.  
+   The skill scans the repo first and suggests a default: existing governance found → `update`; none → `full-audit`.
+   - `full-audit`: the full kit (Parts 1–4) with all gates.
+   - `update`: incremental refresh — a `RE_AUDIT` drift delta between the current code and the existing docs/governance, then an update plan and approved implementation only.
+   - `install-only`: just install or refresh the skill in this repo; no audit.
+
+2. **Which IDE to install into?** Asked only when the skill is not installed yet or is outdated. Reply with one of: `cursor` | `claude` | `codex` | `generic`.  
    The skill then writes itself into the target repo at **one** path only:
 
    | Choice | Path written in the target repo |
@@ -85,13 +91,14 @@ The skill stops twice before auditing:
    | `codex` | `.agents/skills/repo-governance-audit/` |
    | `generic` | `.agents/skills/repo-governance-audit/` |
 
-2. **Execution mode?** Reply with `multi-agent` or `step-by-step`.  
+3. **Execution mode?** Asked only for `full-audit`. Reply with `multi-agent` or `step-by-step`.  
    - `multi-agent`: one-copy orchestrator with specialists (falls back to sequential roles if the IDE has no real subagents).  
-   - `step-by-step`: Parts 1→2→3→4 in the main agent, stopping at each gate.
+   - `step-by-step`: Parts 1→2→3→4 in the main agent, stopping at each gate.  
+   `update` always runs step-by-step: its scope is a bounded delta.
 
-### Step 5 — Run the audit and respect the gates
+### Step 5 — Run and respect the gates
 
-After those answers, the skill runs the full kit (Parts 1–4):
+After those answers, the skill runs the chosen mode (full kit Parts 1–4, or the bounded update flow):
 
 1. Review the Part 1 diagnosis; correct facts if needed; continue when ready.
 2. Review the documentation plan (Part 2) and governance plan (Part 3).
@@ -113,8 +120,8 @@ https://github.com/Guigass/agentic-repo-governance-kit
 The repository currently open in your workspace is the TARGET repository. The kit repository is only an instruction source and must not be analyzed as the target.
 
 First, read these files in order:
-1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/00-HOW-TO-USE.md
-2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+1. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/00-HOW-TO-USE.md
+2. https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Execute only Part 1 now, using READ_ONLY_AUDIT and STANDARD depth.
 
@@ -142,7 +149,7 @@ After reviewing and correcting the diagnosis, use the next prompt explicitly.
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 2:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Use the approved diagnosis already present in this conversation. Produce the documentation architecture and exact file plan, but do not modify any files. Stop after the plan.
 ```
@@ -153,7 +160,7 @@ Use the approved diagnosis already present in this conversation. Produce the doc
 Continue using the Agentic Repository Governance Kit.
 
 Read and execute only Part 3:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Use the approved diagnosis and documentation plan already present in this conversation. Produce the Rules, Skills, Agents, and Router plan for the approved target environments, but do not modify any files. Stop after the plan.
 ```
@@ -169,7 +176,7 @@ Approved scope:
 [paste the exact approved files and actions here]
 
 Read and execute Part 4 of the Agentic Repository Governance Kit:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Implement only the approved scope. Preserve unrelated and pre-existing changes. Do not change functional application code. Do not stage, commit, push, publish, or access external systems unless separately authorized.
 ```
@@ -199,7 +206,7 @@ Configuration:
 - Commit, push, PR, deploy, and access to external systems: forbidden without separate authorization
 
 Read first:
-https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/00-HOW-TO-USE.md
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/00-HOW-TO-USE.md
 
 ORCHESTRATOR RULES
 
@@ -236,7 +243,7 @@ Provide it with:
 - the current target repository;
 - the restrictions in this prompt;
 - Part 1 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/01-DISCOVERY-AND-DIAGNOSIS.md
 
 Task:
 - fully execute discovery and diagnosis;
@@ -254,7 +261,7 @@ Provide it with:
 - the complete APPROVABLE_DIAGNOSIS;
 - confirmed factual corrections, if any;
 - Part 2 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/02-DOCUMENTATION-ARCHITECTURE-AND-PLAN.md
 
 Task:
 - design the proportional documentation architecture;
@@ -274,7 +281,7 @@ Provide it with:
 - the APPROVABLE_DIAGNOSIS;
 - the DOCUMENTATION_PLAN;
 - Part 3 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/03-AGENTIC-GOVERNANCE-AND-PLAN.md
 
 Task:
 - detect approved target environments and validate their current formats;
@@ -332,7 +339,7 @@ Provide it with:
 - GOVERNANCE_PLAN;
 - INTEGRITY_ASSESSMENT;
 - Part 4 of the kit:
-  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.3.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
+  https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/04-IMPLEMENTATION-VALIDATION-AND-REPORT.md
 
 Task:
 - implement only files and actions present in the APPROVED_ALLOWLIST;

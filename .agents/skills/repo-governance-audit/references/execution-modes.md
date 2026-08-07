@@ -1,6 +1,6 @@
 # Execution modes
 
-Both modes run the full kit (Parts 1–4) and keep every human gate. Prefer the kit README orchestrator / bootstrap wording over inventing a parallel process.
+Both modes run the full kit (Parts 1–4) and keep every human gate. They apply to `full-audit` only; `update` mode always runs step-by-step in the main agent (bounded delta scope — see [update-mode.md](update-mode.md)). Prefer the kit README orchestrator / bootstrap wording over inventing a parallel process.
 
 ## Shared gates
 
