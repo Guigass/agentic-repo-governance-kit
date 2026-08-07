@@ -16,7 +16,7 @@ description: >-
 
 Entry point for the [Agentic Repository Governance Kit](https://github.com/Guigass/agentic-repo-governance-kit). The open workspace is the TARGET repository. The kit is only an instruction source — never audit or modify the kit as the target.
 
-Pinned kit version for raw URLs: `v1.4.0`.
+Pinned kit version for raw URLs: `v1.4.1`.
 
 If the user already stated the mode, IDE, or execution mode in the invocation, accept it and do not ask again.
 
@@ -56,8 +56,8 @@ Defaults: depth `STANDARD` (`LEAN` is the default for the drift delta in `update
 
 Load kit parts from the local kit clone when available; otherwise use pinned raw URLs under:
 
-- English: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/en/`
-- Portuguese: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/pt-BR/`
+- English: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.1/en/`
+- Portuguese: `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.1/pt-BR/`
 
 Always read Part 0 first (`00-HOW-TO-USE.md` / `00-COMO-USAR.md`), then the part for the current stage.
 

@@ -25,7 +25,7 @@ Source of truth (in order):
 
 1. The skill directory currently loaded / being executed (self-copy).
 2. Local kit clone: `.agents/skills/repo-governance-audit/`.
-3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/.agents/skills/repo-governance-audit/`.
+3. Pinned raw URLs under `https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.1/.agents/skills/repo-governance-audit/`.
 
 ## Overwrite rules
 

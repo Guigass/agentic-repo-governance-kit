@@ -6,6 +6,17 @@ This project adheres to [Semantic Versioning](https://semver.org/), and this cha
 
 ## [Unreleased]
 
+## [v1.4.1] - 2026-08-07
+### Added
+- Copy-paste install prompt in both READMEs (Option A under Step 1): the agent fetches the pinned skill and writes it into the target repo at the chosen IDE path.
+
+### Changed
+- Bootstrap, orchestrator, skill, and install-prompt pinned raw URLs to `/v1.4.1/`.
+
+### Migration
+- Pinned executions against `v1.4.0` remain valid on that tag.
+- New executions should point raw URLs at `/v1.4.1/`.
+
 ## [v1.4.0] - 2026-08-07
 ### Added
 - Mode selection in the installable audit skill: `full-audit` (Parts 1–4), `update` (incremental refresh of existing docs, rules, skills, and agents via the kit's `RE_AUDIT` drift delta; new `references/update-mode.md`), and `install-only` (install/refresh the skill without auditing). The skill scans the target first, recommends a default mode, and skips questions already answered in the invocation.
