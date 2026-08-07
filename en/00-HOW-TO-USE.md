@@ -73,7 +73,7 @@ The mode changes the amount of sampling and traced flows; it does not reduce saf
 
 ## Alternative entrypoint — installable skill
 
-When available, the skill `.agents/skills/repo-governance-audit/` is an alternative to pasting the README bootstrap. It installs itself into the chosen IDE path in the target repo, asks for multi-agent or step-by-step execution, then runs Parts 1–4 with the same gates as this guide. See the "Installable audit skill" section in `README.md`.
+When available, the skill `.agents/skills/repo-governance-audit/` is an alternative to pasting the README bootstrap. It first asks what to do — `full-audit` (Parts 1–4 with the same gates as this guide), `update` (incremental refresh of existing governance via the `RE_AUDIT` drift delta, with a bounded update plan and the same approval gate), or `install-only` — then installs or refreshes itself in the chosen IDE path when needed and runs the chosen mode. See the "Installable audit skill" section in `README.md`.
 
 ## Multi-agent execution
 
