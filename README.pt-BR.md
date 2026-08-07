@@ -35,6 +35,40 @@ Quando o alvo já tiver docs, rules, skills ou agents, a auditoria também plane
 
 ### Passo 1 — Deixar a skill disponível (primeira vez)
 
+Abra o repositório **alvo** na IDE (não este kit, a menos que você queira auditar o kit explicitamente). Em seguida use uma das opções abaixo.
+
+#### Opção A — Pedir ao agente para instalar a skill (recomendado)
+
+Copie e envie este prompt enquanto o agente estiver trabalhando no repositório que você quer auditar. O agente busca a skill na release pinada e grava no seu projeto:
+
+```text
+Instale a skill repo-governance-audit do Agentic Repository Governance Kit neste repositório.
+
+Fonte (pinada):
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/.agents/skills/repo-governance-audit/
+
+1. Pergunte em qual IDE instalar: cursor | claude | codex | generic.
+2. Baixe estes arquivos da fonte acima:
+   - SKILL.md
+   - references/install-targets.md
+   - references/execution-modes.md
+   - references/governance-cleanup.md
+   - references/update-mode.md
+3. Grave-os em exatamente um path neste repositório:
+   - cursor  → .cursor/skills/repo-governance-audit/
+   - claude  → .claude/skills/repo-governance-audit/
+   - codex   → .agents/skills/repo-governance-audit/
+   - generic → .agents/skills/repo-governance-audit/
+4. Grave apenas esses arquivos da skill. Não altere código da aplicação.
+5. Após instalar, pare e informe o path gravado. Não inicie uma auditoria a menos que eu peça.
+
+Responda em português brasileiro.
+```
+
+Depois da instalação, recarregue a sessão do agente se as skills forem cacheadas e continue no Passo 2.
+
+#### Opção B — Cópia manual
+
 Clone ou baixe este kit e copie a pasta `.agents/skills/repo-governance-audit/` para um local que sua IDE já carregue:
 
 | Ambiente | Copie a pasta para |
@@ -58,11 +92,7 @@ Exemplo (instalação portável no repositório alvo):
 cp -R .agents/skills/repo-governance-audit /caminho/do/repo-alvo/.agents/skills/repo-governance-audit
 ```
 
-### Passo 2 — Abrir o repositório que você quer auditar
-
-Abra o repositório **alvo** na IDE (não este kit, a menos que você queira auditar o kit explicitamente).
-
-### Passo 3 — Invocar a skill
+### Passo 2 — Invocar a skill
 
 No chat do agente, peça por exemplo:
 
@@ -71,7 +101,7 @@ Execute a skill repo-governance-audit neste repositório.
 Responda em português brasileiro.
 ```
 
-### Passo 4 — Responder às perguntas da skill
+### Passo 3 — Responder às perguntas da skill
 
 A skill faz até três perguntas curtas e pula as que você já respondeu na invocação (por exemplo: "Execute a skill repo-governance-audit em modo update"):
 
@@ -96,7 +126,7 @@ A skill faz até três perguntas curtas e pula as que você já respondeu na inv
    - `passo a passo`: Partes 1→2→3→4 no agente principal, parando em cada gate.  
    O `update` sempre roda passo a passo: seu escopo é um delta limitado.
 
-### Passo 5 — Rodar e respeitar os gates
+### Passo 4 — Rodar e respeitar os gates
 
 Depois dessas respostas, a skill executa o modo escolhido (kit completo Partes 1–4, ou o fluxo de atualização limitado):
 
@@ -105,7 +135,7 @@ Depois dessas respostas, a skill executa o modo escolhido (kit completo Partes 1
 3. Aprove uma allowlist exata de arquivos e ações (“continuar” vago não basta).
 4. Só então a Parte 4 implementa o escopo aprovado e reporta a validação.
 
-Até essa aprovação explícita, a auditoria permanece somente leitura (exceto os arquivos da skill gravados no Passo 4).
+Até essa aprovação explícita, a auditoria permanece somente leitura (exceto os arquivos da skill gravados na instalação).
 
 ## Início rápido com URL
 

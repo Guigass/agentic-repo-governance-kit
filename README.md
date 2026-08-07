@@ -35,6 +35,40 @@ When the target already has docs, rules, skills, or agents, the audit also plans
 
 ### Step 1 — Make the skill available (first time)
 
+Open the **target** repository in your IDE (not this kit, unless you explicitly want to audit the kit itself). Then use one of the options below.
+
+#### Option A — Prompt the agent to install the skill (recommended)
+
+Copy and send this prompt while the agent is working in the repository you want to audit. The agent fetches the skill from the pinned release and writes it into your project:
+
+```text
+Install the repo-governance-audit skill from the Agentic Repository Governance Kit into this repository.
+
+Source (pinned):
+https://raw.githubusercontent.com/Guigass/agentic-repo-governance-kit/v1.4.0/.agents/skills/repo-governance-audit/
+
+1. Ask me which IDE to install into: cursor | claude | codex | generic.
+2. Fetch these files from the source above:
+   - SKILL.md
+   - references/install-targets.md
+   - references/execution-modes.md
+   - references/governance-cleanup.md
+   - references/update-mode.md
+3. Write them into exactly one path in this repository:
+   - cursor  → .cursor/skills/repo-governance-audit/
+   - claude  → .claude/skills/repo-governance-audit/
+   - codex   → .agents/skills/repo-governance-audit/
+   - generic → .agents/skills/repo-governance-audit/
+4. Write only those skill files. Do not change application code.
+5. After install, stop and tell me the path written. Do not start an audit unless I ask.
+
+Respond in English.
+```
+
+After install, reload the agent session if skills are cached, then continue from Step 2.
+
+#### Option B — Manual copy
+
 Clone or download this kit, then copy the folder `.agents/skills/repo-governance-audit/` into a location your IDE already loads:
 
 | Environment | Copy the folder to |
@@ -58,11 +92,7 @@ Example (portable install into the target repo):
 cp -R .agents/skills/repo-governance-audit /path/to/target-repo/.agents/skills/repo-governance-audit
 ```
 
-### Step 2 — Open the repository you want to audit
-
-Open the **target** repository in your IDE (not this kit, unless you explicitly want to audit the kit itself).
-
-### Step 3 — Invoke the skill
+### Step 2 — Invoke the skill
 
 In the agent chat, ask for example:
 
@@ -71,7 +101,7 @@ Run the repo-governance-audit skill on this repository.
 Respond in English.
 ```
 
-### Step 4 — Answer the skill questions
+### Step 3 — Answer the skill questions
 
 The skill asks up to three short questions and skips any you already answered in the invocation (for example: "Run the repo-governance-audit skill in update mode"):
 
@@ -96,7 +126,7 @@ The skill asks up to three short questions and skips any you already answered in
    - `step-by-step`: Parts 1→2→3→4 in the main agent, stopping at each gate.  
    `update` always runs step-by-step: its scope is a bounded delta.
 
-### Step 5 — Run and respect the gates
+### Step 4 — Run and respect the gates
 
 After those answers, the skill runs the chosen mode (full kit Parts 1–4, or the bounded update flow):
 
@@ -105,7 +135,7 @@ After those answers, the skill runs the chosen mode (full kit Parts 1–4, or th
 3. Approve an exact allowlist of files and actions (vague “continue” is not enough).
 4. Only then Part 4 implements the approved scope and reports validation.
 
-Until that explicit approval, the audit stays read-only (except the skill files written in Step 4).
+Until that explicit approval, the audit stays read-only (except the skill files written during install).
 
 ## Quick start with a URL
 
